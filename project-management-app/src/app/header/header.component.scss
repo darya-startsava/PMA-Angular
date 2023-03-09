@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+$blueGrey: mat.define-palette(mat.$blue-grey-palette);
+
+.header_wrapper {
+  background-color: mat.get-color-from-palette($blueGrey);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+}
+
+
+.header_buttons_wrapper {
+  display: flex;
+  column-gap: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}
