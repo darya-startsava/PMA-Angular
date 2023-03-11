@@ -10,11 +10,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { MainPageComponent } from './main-page/main-page.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    MainPageComponent,
+    WelcomePageComponent,
+    SignInPageComponent,
+    SignUpPageComponent,
   ],
   imports: [
     BrowserModule,
