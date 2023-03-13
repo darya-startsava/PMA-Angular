@@ -1,6 +1,11 @@
 {
   "signIn": "Login",
-  "signUp":"Sign up",
-  "en":"En",
-  "pl":"Pl"
+  "signUp": "Sign up",
+  "en": "En",
+  "pl": "Pl",
+  "name": "Name",
+  "login": "Login",
+  "password": "Password",
+  "fieldIsRequired": "This field is required",
+  "required4symbols": "Requires at least 4 characters"
 }

@@ -2,5 +2,10 @@
   "signIn": "Zaloguj się",
   "signUp": "Zarejestruj się",
   "en": "Ang",
-  "pl": "Pol"
+  "pl": "Pol",
+  "name": "Imię",
+  "login": "Login",
+  "password": "Hasło",
+  "fieldIsRequired": "To pole jest wymagane",
+  "required4symbols": "Wymaga co najmniej 4 znaków"
 }

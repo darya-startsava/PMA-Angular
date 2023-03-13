@@ -1,7 +1,7 @@
 <div class="header_wrapper" *transloco="let t">
   <div class="header_buttons_wrapper">
-    <button mat-raised-button color="primary" [routerLink]="['/sign-in']">{{ t('signIn') }}</button>
-    <button mat-raised-button color="primary" [routerLink]="['/sign-up']">{{ t('signUp') }}</button>
+    <button mat-raised-button color="primary" routerLink="/sign-in">{{ t('signIn') }}</button>
+    <button mat-raised-button color="primary" routerLink="/sign-up">{{ t('signUp') }}</button>
     <mat-button-toggle-group name="language" aria-label="app language">
       <mat-button-toggle value="en"  (click)="change('en')">{{ t('en') }}</mat-button-toggle>
       <mat-button-toggle value="pl"  (click)="change('pl')">{{ t('pl') }}</mat-button-toggle>
