@@ -10,6 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +18,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
     WelcomePageComponent,
     SignInPageComponent,
     SignUpPageComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
     MatButtonToggleModule,
     MatInputModule,
     MatIconModule,
+    MatDialogModule,
     HttpClientModule,
     TranslocoRootModule
   ],

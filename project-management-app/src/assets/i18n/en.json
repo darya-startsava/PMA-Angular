@@ -7,5 +7,9 @@
   "login": "Login",
   "password": "Password",
   "fieldIsRequired": "This field is required",
-  "required4symbols": "Requires at least 4 characters"
+  "required4symbols": "Requires at least 4 characters",
+  "close": "Close",
+  "commonErrorMessage": "Something went wrong. Try again.",
+  "successfullyRegisteredMessage": "User with login {{login}} has been successfully registered.",
+  "existedLoginErrorMessage":"User with login {{login}} already exists. Please choose another."
 }

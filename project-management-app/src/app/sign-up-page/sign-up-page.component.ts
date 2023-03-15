@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { SignUpInterface, SignUpService } from './sign-up.service';
+import { SignUpService } from './sign-up.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { TranslocoService } from '@ngneat/transloco';
+
+
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -10,7 +15,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 export class SignUpPageComponent {
   hide = true;
-  user: SignUpInterface | undefined;
+
 
   signUpForm = this.formBuilder.group({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -18,14 +23,42 @@ export class SignUpPageComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
-  constructor(private signUpService: SignUpService,
-    private formBuilder: FormBuilder,) { }
+  message = '';
+
+  constructor(public signUpService: SignUpService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private translocoService: TranslocoService) { }
+
+  openDialog(): void {
+    this.dialog.open(DialogComponent, {
+      data: { message: this.message },
+    });
+  }
+
+  clearForm(): void {
+    this.signUpForm.reset()
+  }
+
 
   onSubmit(): void {
-    this.signUpService.signUp(this.signUpForm.value)
-      .subscribe(user => {
-        this.user = user;
-      });
+    const login = this.signUpForm.value.login;
+    this.signUpService.signUp(this.signUpForm.value).subscribe({
+      next: () => {
+        this.message = this.translocoService.translate('successfullyRegisteredMessage', { login: login });
+        this.openDialog();
+        this.clearForm();
+      }, error: (error) => {
+        switch (error.status) {
+          case 409:
+            this.message = this.translocoService.translate('existedLoginErrorMessage', { login: login });
+            break;
+          default:
+            this.message = this.translocoService.translate('commonErrorMessage');
+        }
+        this.openDialog();
+      }
+    })
   }
 
 }

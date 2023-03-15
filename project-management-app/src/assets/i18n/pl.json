@@ -7,5 +7,9 @@
   "login": "Login",
   "password": "Hasło",
   "fieldIsRequired": "To pole jest wymagane",
-  "required4symbols": "Wymaga co najmniej 4 znaków"
+  "required4symbols": "Wymaga co najmniej 4 znaków",
+  "close": "Zamknąć",
+  "commonErrorMessage": "Coś poszło nie tak. Spróbuj ponownie.",
+  "successfullyRegisteredMessage": "Użytkownik z loginem {{login}} został pomyślnie zarejestrowany.",
+  "existedLoginErrorMessage": "Użytkownik z loginem {{login}} już istnieje. Proszę wybrać inny."
 }
