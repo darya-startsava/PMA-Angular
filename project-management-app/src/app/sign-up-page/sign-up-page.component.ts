@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs';
 import { SignUpService } from './sign-up.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslocoService } from '@ngneat/transloco';
-
+import { Router } from '@angular/router';
 
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -14,21 +15,20 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./sign-up-page.component.scss']
 })
 export class SignUpPageComponent {
-  hide = true;
-
 
   signUpForm = this.formBuilder.group({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     login: new FormControl('', [Validators.required, Validators.minLength(4)]),
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
-
   message = '';
+  hide = true;
 
   constructor(public signUpService: SignUpService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private translocoService: TranslocoService) { }
+    private translocoService: TranslocoService,
+    private router: Router) { }
 
   openDialog(): void {
     this.dialog.open(DialogComponent, {
@@ -36,18 +36,18 @@ export class SignUpPageComponent {
     });
   }
 
-  clearForm(): void {
-    this.signUpForm.reset()
+  goToSignInPage(): void {
+    this.router.navigate(['sign-in']);
   }
 
 
   onSubmit(): void {
     const login = this.signUpForm.value.login;
-    this.signUpService.signUp(this.signUpForm.value).subscribe({
+    this.signUpService.signUp(this.signUpForm.value).pipe(take(1)).subscribe({
       next: () => {
         this.message = this.translocoService.translate('successfullyRegisteredMessage', { login: login });
         this.openDialog();
-        this.clearForm();
+        this.goToSignInPage();
       }, error: (error) => {
         switch (error.status) {
           case 409:
@@ -58,7 +58,7 @@ export class SignUpPageComponent {
         }
         this.openDialog();
       }
-    })
+    });
   }
 
 }

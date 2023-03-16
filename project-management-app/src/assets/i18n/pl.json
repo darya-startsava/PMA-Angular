@@ -11,5 +11,6 @@
   "close": "Zamknąć",
   "commonErrorMessage": "Coś poszło nie tak. Spróbuj ponownie.",
   "successfullyRegisteredMessage": "Użytkownik z loginem {{login}} został pomyślnie zarejestrowany.",
-  "existedLoginErrorMessage": "Użytkownik z loginem {{login}} już istnieje. Proszę wybrać inny."
+  "existedLoginErrorMessage": "Użytkownik z loginem {{login}} już istnieje. Proszę wybrać inny.",
+  "wrongAuthMessage": "Błędny login lub hasło."
 }

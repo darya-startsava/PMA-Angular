@@ -1,1 +1,37 @@
-<p>sign-in-page works!</p>
+<div class="sign-in_form_wrapper" *transloco="let t">
+  <form class="sign-in_form_inputs_wrapper" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <mat-label>
+        {{t ('login')}}
+      </mat-label>
+      <input matInput formControlName="login">
+      <mat-error *ngIf="signInForm.controls.login.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+      <mat-error *ngIf="signInForm.controls.login.hasError('minlength')">
+        {{t ('required4symbols')}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{t ('password')}}
+      </mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="signInForm.controls.password.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+      <mat-error *ngIf="signInForm.controls.password.hasError('minlength')">
+        {{t ('required4symbols')}}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="button" type="submit" [disabled]="signInForm.invalid">{{t
+      ('signIn')}}</button>
+  </form>
+</div>
