@@ -3,7 +3,7 @@
     <button *ngIf="token" mat-raised-button color="primary" routerLink="/edit-profile">{{ t('editProfile')
       }}</button>
     <button *ngIf="token" mat-raised-button color="primary">{{ t('newBoard') }}</button>
-    <button *ngIf="token" mat-raised-button color="primary" routerLink="/welcome">{{ t('signOut') }}</button>
+    <button *ngIf="token" mat-raised-button color="primary" (click)="onSignOut()">{{ t('signOut') }}</button>
     <button *ngIf="!token" mat-raised-button color="primary" routerLink="/sign-in">{{ t('signIn') }}</button>
     <button *ngIf="!token" mat-raised-button color="primary" routerLink="/sign-up">{{ t('signUp') }}</button>
     <mat-button-toggle-group name="language" aria-label="app language">

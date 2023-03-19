@@ -44,4 +44,9 @@ export class SignInService {
         error: () => { this.token = ''; this.login = ''; this.changeToken(this.token); }
       }));
   }
+
+  signOut() {
+    this.token = '';
+    this.changeToken(this.token);
+  }
 }
