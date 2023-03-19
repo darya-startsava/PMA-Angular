@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-
 import { Observable, tap } from 'rxjs';
+import { endpoints } from '../constants';
 
 export interface SignUpInterface {
   "name"?: string | null,
@@ -21,7 +21,7 @@ export interface SignUpResponseInterface {
 
 export class SignUpService {
 
-  url = 'http://localhost:3000/auth/signup';
+  url = endpoints.signUp;
   status!: number;
   login = '';
 
@@ -34,9 +34,9 @@ export class SignUpService {
     }).pipe(
       tap({
         // Succeeds when there is a response; ignore other events
-        next: (event) => { console.log(event); this.status = event.status, this.login = event?.body?.login || '' },
+        next: (event) => { this.status = event.status, this.login = event?.body?.login || '' },
         // Operation failed; error is an HttpErrorResponse
-        error: (error) => { console.log(error); this.status = error.status }
+        error: (error) => this.status = error.status
       }));
   }
 }

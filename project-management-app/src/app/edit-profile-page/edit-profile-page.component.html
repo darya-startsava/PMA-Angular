@@ -1,0 +1,50 @@
+<div class="edit-profile_form_wrapper" *transloco="let t">
+  <h2 class="edit-profile_title">{{t('editProfile')}}</h2>
+  <form class="edit-profile_form_inputs_wrapper" [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>
+        {{t ('newName')}}
+      </mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="editProfileForm.controls.name.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+      <mat-error *ngIf="editProfileForm.controls.name.hasError('minlength')">
+        {{t ('required4symbols')}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{t ('newLogin')}}
+      </mat-label>
+      <input matInput formControlName="login" >
+      <mat-error *ngIf="editProfileForm.controls.login.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+      <mat-error *ngIf="editProfileForm.controls.login.hasError('minlength')">
+        {{t ('required4symbols')}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>
+        {{t ('newPassword')}}
+      </mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"  type="button">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="editProfileForm.controls.password.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+      <mat-error *ngIf="editProfileForm.controls.password.hasError('minlength')">
+        {{t ('required4symbols')}}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="button" type="submit" [disabled]="editProfileForm.invalid">{{t
+      ('saveChanges')}}</button>
+  </form>
+</div>

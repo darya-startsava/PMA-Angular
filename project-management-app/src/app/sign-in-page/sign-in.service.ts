@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subject } from 'rxjs';
+import { endpoints } from '../constants';
 
 export interface SignInInterface {
   "login"?: string | null,
@@ -17,10 +17,17 @@ export interface SignInResponseInterface {
 })
 export class SignInService {
 
-  url = 'http://localhost:3000/auth/signin';
-  token = ""
+  url = endpoints.signIn;
+  token = '';
+  login = ''
+  tokenChange: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
+  changeToken(token: string) {
+    this.tokenChange.next(token);
+  }
 
   signIn(user: SignInInterface): Observable<HttpResponse<SignInResponseInterface>> {
     return this.http.post<SignInResponseInterface>(
@@ -29,9 +36,12 @@ export class SignInService {
     }).pipe(
       tap({
         // Succeeds when there is a response; ignore other events
-        next: (event) => { console.log(event); this.token = event?.body?.token || '' },
+        next: (event) => {
+          this.token = event.body?.token ? `Bearer ${event.body.token}` : ''; this.login = user.login || '';
+          this.changeToken(this.token);
+        },
         // Operation failed; error is an HttpErrorResponse
-        error: (error) => { console.log(error); this.token = '' }
+        error: () => { this.token = ''; this.login = ''; this.changeToken(this.token); }
       }));
   }
 }

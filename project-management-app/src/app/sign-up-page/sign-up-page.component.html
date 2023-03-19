@@ -1,4 +1,5 @@
 <div class="sign-up_form_wrapper" *transloco="let t">
+  <h2 class="sign-up_title">{{t('signUp')}}</h2>
   <form class="sign-up_form_inputs_wrapper" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>
@@ -32,7 +33,7 @@
       </mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
+        [attr.aria-pressed]="hide" type="button">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
       <mat-error *ngIf="signUpForm.controls.password.hasError('required')">

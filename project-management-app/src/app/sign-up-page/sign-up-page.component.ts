@@ -11,7 +11,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up-page.component.html',
-  providers: [SignUpService],
   styleUrls: ['./sign-up-page.component.scss']
 })
 export class SignUpPageComponent {

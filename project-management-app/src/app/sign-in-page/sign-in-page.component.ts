@@ -11,7 +11,6 @@ import { DialogComponent } from '../dialog/dialog.component'
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
-  providers: [SignInService],
   styleUrls: ['./sign-in-page.component.scss']
 })
 export class SignInPageComponent {
@@ -44,7 +43,6 @@ export class SignInPageComponent {
     this.signInService.signIn(this.signInForm.value).pipe(take(1)).subscribe({
       next: () => {
         this.goToMainPage();
-        console.log('token:', this.signInService.token)
       }, error: (error) => {
         switch (error.status) {
           case 401:
@@ -54,7 +52,6 @@ export class SignInPageComponent {
             this.message = this.translocoService.translate('commonErrorMessage');
         }
         this.openDialog();
-        console.log('token:', this.signInService.token)
       }
     })
   }

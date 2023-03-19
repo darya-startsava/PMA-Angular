@@ -19,6 +19,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DialogComponent } from './dialog/dialog.component';
     SignInPageComponent,
     SignUpPageComponent,
     DialogComponent,
+    EditProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,6 @@ import { DialogComponent } from './dialog/dialog.component';
     HttpClientModule,
     TranslocoRootModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
