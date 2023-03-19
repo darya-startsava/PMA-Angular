@@ -20,5 +20,6 @@
   "newLogin": "Nowy login",
   "newPassword": "Nowe hasło",
   "signOut": "Wyloguj się",
-  "profileEditedMessage": "Profil został pomyślnie zmieniony"
+  "profileEditedMessage": "Profil został pomyślnie zmieniony",
+  "deleteProfile": "Usuń profil"
 }

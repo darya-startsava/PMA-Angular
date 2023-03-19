@@ -20,5 +20,6 @@
   "newLogin": "New login",
   "newPassword": "New password",
   "signOut": "Sign out",
-  "profileEditedMessage": "The profile has been changed successfully"
+  "profileEditedMessage": "The profile has been changed successfully",
+  "deleteProfile": "Delete profile"
 }

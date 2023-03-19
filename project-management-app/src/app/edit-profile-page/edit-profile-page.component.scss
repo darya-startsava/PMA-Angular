@@ -1,6 +1,8 @@
 .edit-profile_form_wrapper {
   width: 320px;
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 
   .edit-profile_title {
     text-align: center;
@@ -9,5 +11,9 @@
   .edit-profile_form_inputs_wrapper {
     display: flex;
     flex-direction: column;
+  }
+
+  .delete-profile_button {
+    margin-top: 15px;
   }
 }

@@ -113,4 +113,16 @@ export class EditProfilePageComponent implements OnInit {
         },
       });
   }
+
+  onDelete() {
+    this.editProfileService
+      .deleteProfile(this.token)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.signInService.signOut();
+          this.router.navigate(['welcome']);
+        },
+      });
+  }
 }
