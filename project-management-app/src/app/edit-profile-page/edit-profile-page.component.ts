@@ -8,6 +8,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 
 import { DialogComponent } from '../dialog/dialog.component';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-edit-profile-page',
@@ -19,6 +20,7 @@ export class EditProfilePageComponent implements OnInit {
   token = '';
   login = '';
   name = '';
+  messageToConfirm = this.translocoService.translate('confirmDeletion');
 
   editProfileForm = this.formBuilder.group({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -37,7 +39,8 @@ export class EditProfilePageComponent implements OnInit {
     private editProfileService: EditProfileService,
     public dialog: MatDialog,
     private translocoService: TranslocoService,
-    private router: Router
+    private router: Router,
+    public confirmation: MatDialog
   ) {}
 
   goToWelcomePage(): void {
@@ -112,6 +115,20 @@ export class EditProfilePageComponent implements OnInit {
           this.openDialog();
         },
       });
+  }
+
+  openConfirmation(): void {
+    const confirmationRef = this.confirmation.open(ConfirmationComponent, {
+      data: {
+        message: this.messageToConfirm,
+      },
+    });
+
+    confirmationRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onDelete();
+      }
+    });
   }
 
   onDelete() {

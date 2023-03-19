@@ -21,5 +21,8 @@
   "newPassword": "Nowe hasło",
   "signOut": "Wyloguj się",
   "profileEditedMessage": "Profil został pomyślnie zmieniony",
-  "deleteProfile": "Usuń profil"
+  "deleteProfile": "Usuń profil",
+  "no": "Nie",
+  "yes": "Tak",
+  "confirmDeletion": "Czy na pewno chcesz usunąć swoje konto?"
 }

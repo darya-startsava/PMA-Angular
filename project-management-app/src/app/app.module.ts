@@ -20,6 +20,7 @@ import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.
     SignUpPageComponent,
     DialogComponent,
     EditProfilePageComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserModule,

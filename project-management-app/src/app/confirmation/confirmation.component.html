@@ -1,0 +1,7 @@
+<div class="dialog_wrapper" *transloco="let t">
+  <p>{{data.message}}</p>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onDismiss()" color="warn" >{{t('no')}}</button>
+  <button mat-raised-button (click)="onConfirm()" cdkFocusInitial color="primary">{{t('yes')}}</button>
+</div>
+</div>

@@ -21,5 +21,8 @@
   "newPassword": "New password",
   "signOut": "Sign out",
   "profileEditedMessage": "The profile has been changed successfully",
-  "deleteProfile": "Delete profile"
+  "deleteProfile": "Delete profile",
+  "no":"No",
+  "yes":"Yes",
+  "confirmDeletion":"Are you sure you want to delete your account?"
 }
