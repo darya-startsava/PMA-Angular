@@ -44,7 +44,7 @@ export class EditProfilePageComponent implements OnInit {
   ) {}
 
   goToWelcomePage(): void {
-    this.router.navigate(['welcome']);
+    this.router.navigate(['']);
   }
 
   openDialog(): void {
@@ -73,7 +73,7 @@ export class EditProfilePageComponent implements OnInit {
         error: (error) => {
           switch (error.status) {
             case 403:
-              // change to logOut
+              this.signInService.signOut();
               this.goToWelcomePage();
               break;
             default:
@@ -99,7 +99,7 @@ export class EditProfilePageComponent implements OnInit {
         error: (error) => {
           switch (error.status) {
             case 403:
-              // change to logOut
+              this.signInService.signOut();
               this.goToWelcomePage();
               break;
             case 409:
@@ -107,12 +107,13 @@ export class EditProfilePageComponent implements OnInit {
                 'existedLoginErrorMessage',
                 { login: this.editProfileForm.value.login }
               );
+              this.openDialog();
               break;
             default:
               this.message =
                 this.translocoService.translate('commonErrorMessage');
+              this.openDialog();
           }
-          this.openDialog();
         },
       });
   }
@@ -138,7 +139,7 @@ export class EditProfilePageComponent implements OnInit {
       .subscribe({
         next: () => {
           this.signInService.signOut();
-          this.router.navigate(['welcome']);
+          this.goToWelcomePage();
         },
       });
   }

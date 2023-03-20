@@ -27,7 +27,7 @@ export class HeaderComponent {
   }
 
   goToWelcomePage() {
-    this.router.navigate(['welcome']);
+    this.router.navigate(['']);
   }
 
   onSignOut() {
