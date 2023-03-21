@@ -33,5 +33,6 @@
   "boardTitleLabel": "Board Title",
   "deleteBoard": "Delete",
   "confirmDeletionBoard": "Are you sure you want to delete this board?",
-  "boardDeletionMessage":"The board has been successfully deleted."
+  "boardDeletionMessage":"The board has been successfully deleted.",
+  "mainPage":"Main"
 }

@@ -53,6 +53,7 @@ export class MainPageComponent implements OnInit {
   }
 
   onOpenConfirmation(boardId: string): void {
+    event?.stopPropagation();
     this.currentBoardId = boardId;
     console.log();
     const confirmationRef = this.confirmation.open(ConfirmationComponent, {
@@ -96,5 +97,9 @@ export class MainPageComponent implements OnInit {
           }
         },
       });
+  }
+
+  redirect(id: string) {
+    this.router.navigate(['board', id]);
   }
 }

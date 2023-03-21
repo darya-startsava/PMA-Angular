@@ -23,6 +23,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
+import { BoardComponent } from './board/board.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CreateBoardComponent } from './create-board/create-board.component';
     EditProfilePageComponent,
     ConfirmationComponent,
     CreateBoardComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,

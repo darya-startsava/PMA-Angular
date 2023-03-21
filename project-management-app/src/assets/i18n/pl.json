@@ -33,5 +33,6 @@
   "boardTitleLabel": "Tytuł tablicy",
   "deleteBoard": "Usunąć",
   "confirmDeletionBoard": "Czy na pewno chcesz usunąć tę tablicę?",
-  "boardDeletionMessage": "Tablica została pomyślnie usunięta."
+  "boardDeletionMessage": "Tablica została pomyślnie usunięta.",
+  "mainPage": "Główna"
 }

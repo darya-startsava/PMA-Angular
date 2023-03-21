@@ -1,6 +1,6 @@
 <div class="main_page_wrapper" *transloco="let t">
   <div class="boards_wrapper">
-    <div class="board-item" *ngFor="let board of boards">
+    <div class="board-item" *ngFor="let board of boards" (click)="redirect(board._id)">
       <h3 class="board-item_title">{{board.title}}</h3>
       <button class="board-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmation(board._id)">{{
         t('deleteBoard') }}</button>
