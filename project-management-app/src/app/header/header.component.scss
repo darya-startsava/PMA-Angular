@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
 $blueGrey: mat.define-palette(mat.$blue-grey-palette);
+$blueGrey200: mat.define-palette(mat.$blue-grey-palette, 200);
 
 .header_wrapper {
   background-color: mat.get-color-from-palette($blueGrey);
@@ -8,7 +9,6 @@ $blueGrey: mat.define-palette(mat.$blue-grey-palette);
   padding-bottom: 5px;
   padding-right: 20px;
 }
-
 
 .header_buttons_wrapper {
   display: flex;

@@ -30,5 +30,6 @@
   "addBoardTitle": "Dodaj tytuł tablicy",
   "cancel": "Anulować",
   "create": "Tworzyć",
-  "boardTitleLabel": "Tytuł tablicy"
+  "boardTitleLabel": "Tytuł tablicy",
+  "deleteBoard": "Usunąć"
 }

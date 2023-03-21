@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+$blueGrey: mat.define-palette(mat.$blue-grey-palette);
+$blueGrey200: mat.define-palette(mat.$blue-grey-palette, 200);
+
+.main_page_wrapper {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .boards_wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .board-item {
+      padding: 5px;
+      padding-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background-color: mat.get-color-from-palette($blueGrey200);
+      border: mat.get-color-from-palette($blueGrey) solid 3px;
+      border-radius: 10px;
+      width: 250px;
+      height: 200px;
+
+      .board-item_title {
+        text-align: center;
+        width: 90%;
+        overflow-wrap: break-word;
+      }
+
+      .board-item_delete-button {
+        width: 90%;
+      }
+    }
+  }
+}

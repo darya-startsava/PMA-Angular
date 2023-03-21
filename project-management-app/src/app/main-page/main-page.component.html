@@ -1,1 +1,9 @@
-<p>main-page works!</p>
+<div class="main_page_wrapper" *transloco="let t">
+  <div class="boards_wrapper">
+    <div class="board-item" *ngFor="let board of boards">
+      <h3 class="board-item_title">{{board.title}}</h3>
+      <button class="board-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmation()">{{
+        t('deleteBoard') }}</button>
+    </div>
+  </div>
+</div>

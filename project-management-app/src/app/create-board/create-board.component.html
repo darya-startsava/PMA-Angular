@@ -4,7 +4,7 @@
     <p>{{t('addBoardTitle')}}:</p>
     <mat-form-field appearance="fill">
       <mat-label>{{t('boardTitleLabel')}}</mat-label>
-      <input matInput [(ngModel)]="data.title" [formControl]="title">
+      <input matInput [(ngModel)]="data.title" [formControl]="title" maxlength="100">
       <mat-error *ngIf="title.hasError('required')">
         {{t ('fieldIsRequired')}}
       </mat-error>
