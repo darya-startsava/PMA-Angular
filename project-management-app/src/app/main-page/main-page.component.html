@@ -2,7 +2,7 @@
   <div class="boards_wrapper">
     <div class="board-item" *ngFor="let board of boards">
       <h3 class="board-item_title">{{board.title}}</h3>
-      <button class="board-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmation()">{{
+      <button class="board-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmation(board._id)">{{
         t('deleteBoard') }}</button>
     </div>
   </div>

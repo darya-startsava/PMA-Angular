@@ -32,4 +32,14 @@ export class BoardsService {
         })
       );
   }
+
+  deleteBoard(token: string, boardId: string): Observable<unknown> {
+    return this.http
+      .delete(`${this.url}/${boardId}`, {
+        headers: new HttpHeaders({
+          Authorization: `${token}`,
+        }),
+      })
+      .pipe(tap());
+  }
 }

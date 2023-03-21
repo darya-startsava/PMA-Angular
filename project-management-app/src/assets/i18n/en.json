@@ -22,14 +22,16 @@
   "signOut": "Sign out",
   "profileEditedMessage": "The profile has been changed successfully",
   "deleteProfile": "Delete profile",
-  "no":"No",
-  "yes":"Yes",
-  "confirmDeletion":"Are you sure you want to delete your account?",
-  "boardCreatedMessage":"The board has been successfully created.",
+  "no": "No",
+  "yes": "Yes",
+  "confirmDeletion": "Are you sure you want to delete your account?",
+  "boardCreatedMessage": "The board has been successfully created.",
   "createBoardTitle": "Create board",
   "addBoardTitle": "Add board title",
-  "cancel":"Cancel",
-  "create":"Create",
+  "cancel": "Cancel",
+  "create": "Create",
   "boardTitleLabel": "Board Title",
-  "deleteBoard":"Delete"
+  "deleteBoard": "Delete",
+  "confirmDeletionBoard": "Are you sure you want to delete this board?",
+  "boardDeletionMessage":"The board has been successfully deleted."
 }

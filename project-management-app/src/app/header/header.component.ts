@@ -67,6 +67,7 @@ export class HeaderComponent {
           .pipe(take(1))
           .subscribe({
             next: () => {
+              this.router.navigate(['main']);
               this.message = this.translocoService.translate(
                 'boardCreatedMessage'
               );

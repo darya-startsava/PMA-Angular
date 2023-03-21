@@ -31,5 +31,7 @@
   "cancel": "Anulować",
   "create": "Tworzyć",
   "boardTitleLabel": "Tytuł tablicy",
-  "deleteBoard": "Usunąć"
+  "deleteBoard": "Usunąć",
+  "confirmDeletionBoard": "Czy na pewno chcesz usunąć tę tablicę?",
+  "boardDeletionMessage": "Tablica została pomyślnie usunięta."
 }
