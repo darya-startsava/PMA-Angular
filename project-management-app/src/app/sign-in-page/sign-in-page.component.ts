@@ -6,28 +6,32 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslocoService } from '@ngneat/transloco';
 import { Router } from '@angular/router';
 
-import { DialogComponent } from '../dialog/dialog.component'
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
-  styleUrls: ['./sign-in-page.component.scss']
+  styleUrls: ['./sign-in-page.component.scss'],
 })
 export class SignInPageComponent {
-
   signInForm = this.formBuilder.group({
     login: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
   });
 
   message = '';
   hide = true;
 
-  constructor(public signInService: SignInService,
+  constructor(
+    public signInService: SignInService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private translocoService: TranslocoService,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent, {
@@ -36,24 +40,30 @@ export class SignInPageComponent {
   }
 
   goToMainPage(): void {
-    this.router.navigate(['main'])
+    this.router.navigate(['main']);
   }
 
   onSubmit(): void {
-    this.signInService.signIn(this.signInForm.value).pipe(take(1)).subscribe({
-      next: () => {
-        this.goToMainPage();
-      }, error: (error) => {
-        switch (error.status) {
-          case 401:
-            this.message = this.translocoService.translate('wrongAuthMessage');
-            break;
-          default:
-            this.message = this.translocoService.translate('commonErrorMessage');
-        }
-        this.openDialog();
-      }
-    })
+    this.signInService
+      .signIn(this.signInForm.value)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.goToMainPage();
+          this.signInService.getUserByLogin().subscribe();
+        },
+        error: (error) => {
+          switch (error.status) {
+            case 401:
+              this.message =
+                this.translocoService.translate('wrongAuthMessage');
+              break;
+            default:
+              this.message =
+                this.translocoService.translate('commonErrorMessage');
+          }
+          this.openDialog();
+        },
+      });
   }
 }
-

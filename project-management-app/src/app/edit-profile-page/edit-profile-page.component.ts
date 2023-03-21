@@ -20,6 +20,7 @@ export class EditProfilePageComponent implements OnInit {
   token = '';
   login = '';
   name = '';
+  userId = '';
   messageToConfirm = this.translocoService.translate('confirmDeletion');
 
   editProfileForm = this.formBuilder.group({
@@ -61,33 +62,14 @@ export class EditProfilePageComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.signInService.token;
     this.login = this.editProfileService.login || this.signInService.login;
-    this.editProfileService
-      .getUserByLogin(this.token, this.login)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.name = this.editProfileService.name;
-          this.login = this.editProfileService.login;
-          this.updateForm();
-        },
-        error: (error) => {
-          switch (error.status) {
-            case 403:
-              this.signInService.signOut();
-              this.goToWelcomePage();
-              break;
-            default:
-              this.message =
-                this.translocoService.translate('commonErrorMessage');
-              this.openDialog();
-          }
-        },
-      });
+    this.name = this.editProfileService.name || this.signInService.name;
+    this.userId = this.signInService._id;
+    this.updateForm();
   }
 
   onSubmit(): void {
     this.editProfileService
-      .updateUser(this.token, this.editProfileForm.value)
+      .updateUser(this.token, this.editProfileForm.value, this.userId)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -134,7 +116,7 @@ export class EditProfilePageComponent implements OnInit {
 
   onDelete() {
     this.editProfileService
-      .deleteProfile(this.token)
+      .deleteProfile(this.token, this.userId)
       .pipe(take(1))
       .subscribe({
         next: () => {

@@ -11,6 +11,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +22,7 @@ import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { CreateBoardComponent } from './create-board/create-board.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     DialogComponent,
     EditProfilePageComponent,
     ConfirmationComponent,
+    CreateBoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +48,10 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     MatInputModule,
     MatIconModule,
     MatDialogModule,
+    FormsModule,
     HttpClientModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

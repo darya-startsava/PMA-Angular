@@ -1,0 +1,18 @@
+<div class="create-board_wrapper" *transloco="let t">
+  <h1 mat-dialog-title>{{t('createBoardTitle')}}</h1>
+  <div mat-dialog-content>
+    <p>{{t('addBoardTitle')}}:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>{{t('boardTitleLabel')}}</mat-label>
+      <input matInput [(ngModel)]="data.title" [formControl]="title">
+      <mat-error *ngIf="title.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="create-board_buttons_wrapper">
+    <button class="create-board_button" mat-raised-button color="warn" (click)="onNoClick()">{{t('cancel')}}</button>
+    <button class="create-board_button" mat-raised-button color="primary" (click)="onCreateClick(data.title)"
+      [disabled]=" title.invalid">{{t('create')}}</button>
+  </div>
+</div>

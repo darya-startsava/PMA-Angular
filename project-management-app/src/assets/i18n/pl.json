@@ -24,5 +24,11 @@
   "deleteProfile": "Usuń profil",
   "no": "Nie",
   "yes": "Tak",
-  "confirmDeletion": "Czy na pewno chcesz usunąć swoje konto?"
+  "confirmDeletion": "Czy na pewno chcesz usunąć swoje konto?",
+  "boardCreatedMessage": "Tablica została pomyślnie utworzona.",
+  "createBoardTitle": "Utwórz tablicę",
+  "addBoardTitle": "Dodaj tytuł tablicy",
+  "cancel": "Anulować",
+  "create": "Tworzyć",
+  "boardTitleLabel": "Tytuł tablicy"
 }

@@ -24,5 +24,11 @@
   "deleteProfile": "Delete profile",
   "no":"No",
   "yes":"Yes",
-  "confirmDeletion":"Are you sure you want to delete your account?"
+  "confirmDeletion":"Are you sure you want to delete your account?",
+  "boardCreatedMessage":"The board has been successfully created.",
+  "createBoardTitle": "Create board",
+  "addBoardTitle": "Add board title",
+  "cancel":"Cancel",
+  "create":"Create",
+  "boardTitleLabel": "Board Title"
 }

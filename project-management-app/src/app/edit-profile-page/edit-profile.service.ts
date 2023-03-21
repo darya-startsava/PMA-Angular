@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 import { endpoints } from '../constants';
 
 export interface EditProfileRequestInterface {
@@ -10,11 +9,6 @@ export interface EditProfileRequestInterface {
   password?: string | null;
 }
 
-export interface UserResponseInterface {
-  _id?: string | null;
-  name?: string | null;
-  login?: string | null;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -22,39 +16,17 @@ export interface UserResponseInterface {
 export class EditProfileService {
   url = endpoints.users;
   login = '';
-  _id = '';
   name = '';
 
   constructor(private http: HttpClient) {}
 
-  getUserByLogin(
-    token: string,
-    login: string
-  ): Observable<Array<UserResponseInterface>> {
-    return this.http
-      .get<any>(this.url, {
-        headers: new HttpHeaders({
-          Authorization: `${token}`,
-        }),
-      })
-      .pipe(
-        tap({
-          next: (response) => {
-            const user = response.filter((i) => i.login === login);
-            this.login = user[0].login || '';
-            this._id = user[0]._id || '';
-            this.name = user[0].name || '';
-          },
-        })
-      );
-  }
-
   updateUser(
     token: string,
-    user: EditProfileRequestInterface
+    user: EditProfileRequestInterface,
+    userId:string
   ): Observable<EditProfileRequestInterface> {
     return this.http
-      .put<EditProfileRequestInterface>(`${this.url}/${this._id}`, user, {
+      .put<EditProfileRequestInterface>(`${this.url}/${userId}`, user, {
         headers: new HttpHeaders({
           Authorization: `${token}`,
         }),
@@ -71,9 +43,9 @@ export class EditProfileService {
       );
   }
 
-  deleteProfile(token: string): Observable<unknown> {
+  deleteProfile(token: string, userId:string): Observable<unknown> {
     return this.http
-      .delete(`${this.url}/${this._id}`, {
+      .delete(`${this.url}/${userId}`, {
         headers: new HttpHeaders({
           Authorization: `${token}`,
         }),
