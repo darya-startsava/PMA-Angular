@@ -24,6 +24,7 @@ import { EditProfilePageComponent } from './edit-profile-page/edit-profile-page.
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
 import { BoardComponent } from './board/board.component';
+import { CreateColumnComponent } from './create-column/create-column.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BoardComponent } from './board/board.component';
     ConfirmationComponent,
     CreateBoardComponent,
     BoardComponent,
+    CreateColumnComponent,
   ],
   imports: [
     BrowserModule,

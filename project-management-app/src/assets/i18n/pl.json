@@ -34,5 +34,9 @@
   "deleteBoard": "Usunąć",
   "confirmDeletionBoard": "Czy na pewno chcesz usunąć tę tablicę?",
   "boardDeletionMessage": "Tablica została pomyślnie usunięta.",
-  "mainPage": "Główna"
+  "mainPage": "Główna",
+  "newColumnButton": "Utwórz kolumnę",
+  "deleteColumnButton": "Usunąć",
+  "confirmDeletionColumn": "Czy na pewno chcesz usunąć tę kolumnę?",
+  "columnDeletionMessage": "Kolumna została pomyślnie usunięta."
 }

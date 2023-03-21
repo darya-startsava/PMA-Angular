@@ -1,1 +1,11 @@
-<p>board works!</p>
+<div class="board_wrapper" *transloco="let t">
+  <button class="board_creater-column_button" mat-raised-button color="primary" (click)="onOpenCreateColumnModal()">{{
+    t('newColumnButton') }}</button>
+  <div class="board_columns_wrapper">
+    <div class="column-item" *ngFor="let column of columns" >
+      <h3 class="column-item_title">{{column.title}}</h3>
+      <button class="column-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmationDeleteColumn(column._id)">{{
+        t('deleteColumnButton') }}</button>
+    </div>
+  </div>
+</div>
