@@ -55,7 +55,6 @@ export class MainPageComponent implements OnInit {
   onOpenConfirmation(boardId: string): void {
     event?.stopPropagation();
     this.currentBoardId = boardId;
-    console.log();
     const confirmationRef = this.confirmation.open(ConfirmationComponent, {
       data: {
         message: this.messageToConfirm,

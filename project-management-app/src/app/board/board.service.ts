@@ -32,9 +32,22 @@ export class BoardService {
         tap({
           next: (response) => {
             this.columns = response;
-            console.log(response);
           },
         })
       );
+  }
+
+  deleteColumnById(
+    token: string,
+    boardId: string,
+    columnId: string
+  ): Observable<unknown> {
+    return this.http
+      .delete(`${this.url}/${boardId}/columns/${columnId}`, {
+        headers: new HttpHeaders({
+          Authorization: `${token}`,
+        }),
+      })
+      .pipe(tap());
   }
 }
