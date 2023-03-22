@@ -8,6 +8,8 @@ import { SignInService } from '../sign-in-page/sign-in.service';
 import { BoardService, GetAllColumnsByBoardIdInterface } from './board.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { CreateColumnComponent } from '../create-column/create-column.component';
+import { CreateColumnService } from '../create-column/create-column.service';
 
 @Component({
   selector: 'app-board',
@@ -23,11 +25,14 @@ export class BoardComponent implements OnInit {
   messageToConfirmColumnDeletion = this.translocoService.translate(
     'confirmDeletionColumn'
   );
+  title = '';
+  order = 0;
 
   constructor(
     private translocoService: TranslocoService,
     public signInService: SignInService,
     private boardService: BoardService,
+    private createColumnService: CreateColumnService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -57,7 +62,43 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  onOpenCreateColumnModal() {}
+  onOpenCreateColumnModal(): void {
+    this.title = '';
+    const createColumnRef = this.dialog.open(CreateColumnComponent, {
+      data: { title: this.title },
+    });
+
+    createColumnRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.title = result;
+        this.order = this.boardService.columns.length;
+        this.createColumnService
+          .createColumn(this.token, this.boardId, this.title, this.order)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.message = this.translocoService.translate(
+                'columnCreatedMessage'
+              );
+              this.openDialog();
+              this.getAllColumnsByBorderId();
+            },
+            error: (error) => {
+              switch (error.status) {
+                case 403:
+                  this.signInService.signOut();
+                  this.goToWelcomePage();
+                  break;
+                default:
+                  this.message =
+                    this.translocoService.translate('commonErrorMessage');
+                  this.openDialog();
+              }
+            },
+          });
+      }
+    });
+  }
 
   onOpenConfirmationDeleteColumn(columnId: string): void {
     this.currentColumnId = columnId;

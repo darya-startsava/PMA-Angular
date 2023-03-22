@@ -1,0 +1,16 @@
+.create-column_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+
+  .create-column_buttons_wrapper {
+    display: flex;
+    justify-content: center;
+
+
+    .create-column_button {
+      width: 100px;
+    }
+  }
+}

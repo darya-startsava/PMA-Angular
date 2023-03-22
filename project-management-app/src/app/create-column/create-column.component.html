@@ -1,1 +1,18 @@
-<p>create-column works!</p>
+<div class="create-column_wrapper" *transloco="let t">
+  <h1 mat-dialog-title>{{t('createColumnTitle')}}</h1>
+  <div mat-dialog-content>
+    <p>{{t('addColumnTitle')}}:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>{{t('columnTitleLabel')}}</mat-label>
+      <input matInput [(ngModel)]="data.title" [formControl]="title" maxlength="100">
+      <mat-error *ngIf="title.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="create-column_buttons_wrapper">
+    <button class="create-column_button" mat-raised-button color="warn" (click)="onNoClick()">{{t('cancel')}}</button>
+    <button class="create-column_button" mat-raised-button color="primary" (click)="onCreateClick(data.title)"
+      [disabled]=" title.invalid">{{t('create')}}</button>
+  </div>
+</div>

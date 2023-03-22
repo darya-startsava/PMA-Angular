@@ -38,5 +38,9 @@
   "newColumnButton": "Utwórz kolumnę",
   "deleteColumnButton": "Usunąć",
   "confirmDeletionColumn": "Czy na pewno chcesz usunąć tę kolumnę?",
-  "columnDeletionMessage": "Kolumna została pomyślnie usunięta."
+  "columnDeletionMessage": "Kolumna została pomyślnie usunięta.",
+  "createColumnTitle": "Utwórz kolumnę",
+  "addColumnTitle": "Dodaj tytuł kolumny",
+  "columnTitleLabel": "Tytuł  kolumny",
+  "columnCreatedMessage": "Kolumna została pomyślnie utworzona."
 }

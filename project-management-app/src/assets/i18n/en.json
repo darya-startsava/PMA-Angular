@@ -30,7 +30,7 @@
   "addBoardTitle": "Add board title",
   "cancel": "Cancel",
   "create": "Create",
-  "boardTitleLabel": "Board Title",
+  "boardTitleLabel": "Board title",
   "deleteBoard": "Delete",
   "confirmDeletionBoard": "Are you sure you want to delete this board?",
   "boardDeletionMessage": "The board has been successfully deleted.",
@@ -38,5 +38,9 @@
   "newColumnButton": "Create column",
   "deleteColumnButton": "Delete",
   "confirmDeletionColumn": "Are you sure you want to delete this column?",
-  "columnDeletionMessage": "The column has been successfully deleted."
+  "columnDeletionMessage": "The column has been successfully deleted.",
+  "createColumnTitle": "Create column",
+  "addColumnTitle": "Add column title",
+  "columnTitleLabel": "Column title",
+  "columnCreatedMessage": "The column has been successfully created."
 }
