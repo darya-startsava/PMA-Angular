@@ -27,6 +27,7 @@ export class BoardComponent implements OnInit {
   );
   title = '';
   order = 0;
+  _subscription: any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -37,7 +38,11 @@ export class BoardComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     public confirmation: MatDialog
-  ) {}
+  ) {
+    this._subscription = boardService.columnsListChange.subscribe(
+      (value) => (this.columns = value)
+    );
+  }
 
   ngOnInit() {
     this.boardId = this.route.snapshot.params['id'];

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subject, take } from 'rxjs';
 import { endpoints } from '../constants';
 
 export interface GetAllColumnsByBoardIdInterface {
@@ -15,8 +15,15 @@ export interface GetAllColumnsByBoardIdInterface {
 })
 export class BoardService {
   url = endpoints.boards;
+  urlForPutInOrder = endpoints.columnsSet;
   columns: Array<GetAllColumnsByBoardIdInterface> = [];
+  columnsListChange: Subject<Array<GetAllColumnsByBoardIdInterface>> =
+    new Subject<Array<GetAllColumnsByBoardIdInterface>>();
   constructor(private http: HttpClient) {}
+
+  changeColumnsList(columns: Array<GetAllColumnsByBoardIdInterface>) {
+    this.columnsListChange.next(columns);
+  }
 
   getAllColumnsByBoardId(
     token: string,
@@ -31,10 +38,50 @@ export class BoardService {
       .pipe(
         tap({
           next: (response) => {
-            this.columns = response;
+            if (
+              response.length !== 0 &&
+              response.find((column, index) => column.order !== index)
+            ) {
+              this.putInOrderColumns(response, token);
+            } else {
+              this.columns = response;
+              this.changeColumnsList(response);
+            }
           },
         })
       );
+  }
+
+  putInOrderColumns(
+    columns: Array<GetAllColumnsByBoardIdInterface>,
+    token: string
+  ): any {
+    const columnsSetForHttp = columns.map((column, index) => {
+      return {
+        _id: column._id,
+        order: index,
+      };
+    });
+    return this.http
+      .patch<Array<GetAllColumnsByBoardIdInterface>>(
+        this.urlForPutInOrder,
+        columnsSetForHttp,
+        {
+          headers: new HttpHeaders({
+            Authorization: `${token}`,
+          }),
+        }
+      )
+      .pipe(
+        tap({
+          next: (response) => {
+            this.columns = response;
+            this.changeColumnsList(response);
+          },
+        })
+      )
+      .pipe(take(1))
+      .subscribe();
   }
 
   deleteColumnById(

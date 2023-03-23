@@ -4,4 +4,5 @@ export const endpoints = {
   signUp: `${url}/auth/signup`,
   users: `${url}/users`,
   boards: `${url}/boards`,
+  columnsSet: `${url}/columnsSet`,
 };
