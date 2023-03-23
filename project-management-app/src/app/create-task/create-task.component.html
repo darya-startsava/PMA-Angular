@@ -1,0 +1,19 @@
+<div class="create-task_wrapper" *transloco="let t">
+  <h1 mat-dialog-title>{{t('createTaskTitle')}}</h1>
+  <div mat-dialog-content>
+    <p>{{t('addTaskTitle')}}:</p>
+    <mat-form-field appearance="fill">
+      <mat-label>{{t('taskTitleLabel')}}</mat-label>
+      <input matInput [(ngModel)]="data.title" [formControl]="title" maxlength="100">
+      <mat-error *ngIf="title.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="create-task_buttons_wrapper">
+    <button class="create-task_button" mat-raised-button color="warn" (click)="onNoClick()">{{t('cancel')}}</button>
+    <button class="create-task_button" mat-raised-button color="primary" (click)="onCreateClick(data)"
+      [disabled]=" title.invalid">{{t('create')}}</button>
+  </div>
+</div>
+

@@ -42,5 +42,9 @@
   "createColumnTitle": "Utwórz kolumnę",
   "addColumnTitle": "Dodaj tytuł kolumny",
   "columnTitleLabel": "Tytuł  kolumny",
-  "columnCreatedMessage": "Kolumna została pomyślnie utworzona."
+  "columnCreatedMessage": "Kolumna została pomyślnie utworzona.",
+  "newTaskButton": "Utwórz zadanie",
+  "createTaskTitle": "Utwórz zadanie",
+  "addTaskTitle": "Dodaj tytuł zadania",
+  "taskTitleLabel": "Tytuł zadania"
 }

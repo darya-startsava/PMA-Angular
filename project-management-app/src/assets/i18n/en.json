@@ -42,5 +42,9 @@
   "createColumnTitle": "Create column",
   "addColumnTitle": "Add column title",
   "columnTitleLabel": "Column title",
-  "columnCreatedMessage": "The column has been successfully created."
+  "columnCreatedMessage": "The column has been successfully created.",
+  "newTaskButton": "Create task",
+  "createTaskTitle": "Create task",
+  "addTaskTitle": "Add task title",
+  "taskTitleLabel": "Task title"
 }

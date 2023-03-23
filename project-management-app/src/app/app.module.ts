@@ -25,6 +25,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
 import { BoardComponent } from './board/board.component';
 import { CreateColumnComponent } from './create-column/create-column.component';
+import { TaskComponent } from './task/task.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { CreateColumnComponent } from './create-column/create-column.component';
     CreateBoardComponent,
     BoardComponent,
     CreateColumnComponent,
+    TaskComponent,
+    CreateTaskComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,9 @@ import { BoardService, GetAllColumnsByBoardIdInterface } from './board.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { CreateColumnComponent } from '../create-column/create-column.component';
+import { CreateTaskComponent } from '../create-task/create-task.component';
 import { CreateColumnService } from '../create-column/create-column.service';
+import { CreateTaskService } from '../create-task/create-task.service';
 
 @Component({
   selector: 'app-board',
@@ -28,12 +30,19 @@ export class BoardComponent implements OnInit {
   title = '';
   order = 0;
   _subscription: any;
+  description = '';
+  taskTitle = '';
+  taskOrder = 0;
+  attachedToTaskUsers: Array<string> = [];
+  columnId = '';
+  userId = '';
 
   constructor(
     private translocoService: TranslocoService,
     public signInService: SignInService,
     private boardService: BoardService,
     private createColumnService: CreateColumnService,
+    private createTaskService: CreateTaskService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -48,6 +57,8 @@ export class BoardComponent implements OnInit {
     this.boardId = this.route.snapshot.params['id'];
     this.token = this.signInService.token;
     this.getAllColumnsByBorderId();
+    this.userId = this.signInService._id;
+    console.log(this.userId);
   }
 
   getAllColumnsByBorderId() {
@@ -148,5 +159,56 @@ export class BoardComponent implements OnInit {
           }
         },
       });
+  }
+
+  onOpenCreateTaskModal(): void {
+    this.title = '';
+    const createTaskRef = this.dialog.open(CreateTaskComponent, {
+      data: { title: this.title },
+    });
+
+    createTaskRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        this.taskTitle = result.title;
+        this.columnId = '6419da83a29eef133574a54f';
+        this.taskOrder = 0;
+        this.description = 'task description';
+        this.attachedToTaskUsers = ['640e5c2c463bef5098f72be2'];
+        this.createTaskService
+          .createTask(
+            this.token,
+            this.boardId,
+            this.columnId,
+            this.taskTitle,
+            this.taskOrder,
+            this.description,
+            this.userId,
+            this.attachedToTaskUsers
+          )
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.message = this.translocoService.translate(
+                'columnCreatedMessage'
+              );
+              this.openDialog();
+              this.getAllColumnsByBorderId();
+            },
+            error: (error) => {
+              switch (error.status) {
+                case 403:
+                  this.signInService.signOut();
+                  this.goToWelcomePage();
+                  break;
+                default:
+                  this.message =
+                    this.translocoService.translate('commonErrorMessage');
+                  this.openDialog();
+              }
+            },
+          });
+      }
+    });
   }
 }

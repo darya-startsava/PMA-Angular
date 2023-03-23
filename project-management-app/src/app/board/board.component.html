@@ -1,10 +1,17 @@
 <div class="board_wrapper" *transloco="let t">
-  <button class="board_creater-column_button" mat-raised-button color="primary" (click)="onOpenCreateColumnModal()">{{
-    t('newColumnButton') }}</button>
+  <div class="board-page_buttons_wrapper">
+    <button class="board_create-column_button" mat-raised-button color="primary" (click)="onOpenCreateColumnModal()">{{
+      t('newColumnButton') }}</button>
+    <button *ngIf="columns.length" class="board_create-task_button" mat-raised-button color="primary"
+      (click)="onOpenCreateTaskModal()">{{
+      t('newTaskButton') }}</button>
+  </div>
   <div class="board_columns_wrapper">
-    <div class="column-item" *ngFor="let column of columns" >
-      <h3 class="column-item_title">{{column.title}}</h3>
-      <button class="column-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmationDeleteColumn(column._id)">{{
+    <div class="column-item" *ngFor="let column of columns">
+      <h2 class="column-item_title">{{column.title}}</h2>
+      <app-task class="task_wrapper" [columnId]="column._id"></app-task>
+      <button class="column-item_delete-button" mat-raised-button color="warn"
+        (click)="onOpenConfirmationDeleteColumn(column._id)">{{
         t('deleteColumnButton') }}</button>
     </div>
   </div>
