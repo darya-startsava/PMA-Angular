@@ -1,0 +1,6 @@
+<div *transloco="let t">
+  <h2 class="column-item_title">{{column.title}}</h2>
+  <app-task class="task_wrapper" [columnId]="column._id"></app-task>
+  <button class="column-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmationDeleteColumn()">{{
+    t('deleteColumnButton') }}</button>
+</div>

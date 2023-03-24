@@ -8,11 +8,7 @@
   </div>
   <div class="board_columns_wrapper">
     <div class="column-item" *ngFor="let column of columns">
-      <h2 class="column-item_title">{{column.title}}</h2>
-      <app-task class="task_wrapper" [columnId]="column._id"></app-task>
-      <button class="column-item_delete-button" mat-raised-button color="warn"
-        (click)="onOpenConfirmationDeleteColumn(column._id)">{{
-        t('deleteColumnButton') }}</button>
+      <app-column [column]="column" (afterColumnDeletion)="getAllColumnsByBorderId()"></app-column>
     </div>
   </div>
 </div>

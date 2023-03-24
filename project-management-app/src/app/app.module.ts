@@ -27,6 +27,7 @@ import { BoardComponent } from './board/board.component';
 import { CreateColumnComponent } from './create-column/create-column.component';
 import { TaskComponent } from './task/task.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
+import { ColumnComponent } from './column/column.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CreateTaskComponent } from './create-task/create-task.component';
     CreateColumnComponent,
     TaskComponent,
     CreateTaskComponent,
+    ColumnComponent,
   ],
   imports: [
     BrowserModule,

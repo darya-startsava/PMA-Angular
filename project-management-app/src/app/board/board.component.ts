@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { SignInService } from '../sign-in-page/sign-in.service';
 import { BoardService, GetAllColumnsByBoardIdInterface } from './board.service';
 import { DialogComponent } from '../dialog/dialog.component';
-import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { CreateColumnComponent } from '../create-column/create-column.component';
 import { CreateTaskComponent } from '../create-task/create-task.component';
 import { CreateColumnService } from '../create-column/create-column.service';
@@ -22,11 +21,7 @@ export class BoardComponent implements OnInit {
   token = '';
   columns: Array<GetAllColumnsByBoardIdInterface> = [];
   boardId = '';
-  currentColumnId = '';
   message = '';
-  messageToConfirmColumnDeletion = this.translocoService.translate(
-    'confirmDeletionColumn'
-  );
   title = '';
   order = 0;
   _subscription: any;
@@ -58,7 +53,6 @@ export class BoardComponent implements OnInit {
     this.token = this.signInService.token;
     this.getAllColumnsByBorderId();
     this.userId = this.signInService._id;
-    console.log(this.userId);
   }
 
   getAllColumnsByBorderId() {
@@ -114,51 +108,6 @@ export class BoardComponent implements OnInit {
           });
       }
     });
-  }
-
-  onOpenConfirmationDeleteColumn(columnId: string): void {
-    this.currentColumnId = columnId;
-    const confirmationRef = this.confirmation.open(ConfirmationComponent, {
-      data: {
-        message: this.messageToConfirmColumnDeletion,
-      },
-    });
-
-    confirmationRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.onDeleteColumn();
-      } else {
-        this.currentColumnId = '';
-      }
-    });
-  }
-
-  onDeleteColumn() {
-    this.boardService
-      .deleteColumnById(this.token, this.boardId, this.currentColumnId)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.currentColumnId = '';
-          this.getAllColumnsByBorderId();
-          this.message = this.translocoService.translate(
-            'columnDeletionMessage'
-          );
-          this.openDialog();
-        },
-        error: (error) => {
-          switch (error.status) {
-            case 403:
-              this.signInService.signOut();
-              this.goToWelcomePage();
-              break;
-            default:
-              this.message =
-                this.translocoService.translate('commonErrorMessage');
-              this.openDialog();
-          }
-        },
-      });
   }
 
   onOpenCreateTaskModal(): void {
