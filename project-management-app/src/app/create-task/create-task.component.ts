@@ -1,10 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
+import { UserLoginIdInterface } from '../sign-in-page/sign-in.service';
+
+interface ColumnsIdTitle {
+  columnId: string;
+  title: string;
+}
 
 export interface CreateTaskDataInterface {
-  title: 'string';
-  columnId: 'string';
+  columnId?: string;
+  columns?: [ColumnsIdTitle];
+  userId?: string;
+  users?: Array<UserLoginIdInterface>;
 }
 
 @Component({
@@ -13,8 +21,12 @@ export interface CreateTaskDataInterface {
   styleUrls: ['./create-task.component.scss'],
 })
 export class CreateTaskComponent {
-  title = new FormControl(this.data.title, Validators.required);
-  columnId = '6419da83a29eef133574a54f';
+  title = new FormControl('', Validators.required);
+  description = new FormControl('', Validators.required);
+  column = new FormControl(
+    this.data?.columns ? this.data.columns[0].columnId : ''
+  );
+  users = new FormControl('', Validators.required);
 
   constructor(
     public createTaskRef: MatDialogRef<CreateTaskComponent>,
@@ -25,7 +37,12 @@ export class CreateTaskComponent {
     this.createTaskRef.close();
   }
 
-  onCreateClick(data: CreateTaskDataInterface): void {
-    this.createTaskRef.close(data);
+  onCreateClick(): void {
+    this.createTaskRef.close({
+      title: this.title.value,
+      description: this.description.value,
+      column: this.column.value,
+      users: this.users.value,
+    });
   }
 }

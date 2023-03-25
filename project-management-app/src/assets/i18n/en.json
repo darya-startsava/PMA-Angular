@@ -46,5 +46,11 @@
   "newTaskButton": "Create task",
   "createTaskTitle": "Create task",
   "addTaskTitle": "Add task title",
-  "taskTitleLabel": "Task title"
+  "taskTitleLabel": "Task title",
+  "addTaskDescription": "Add task description",
+  "taskDescriptionLabel": "Task description",
+  "taskCreatedMessage": "The task has been successfully created.",
+  "selectColumnForTask": "Select a column for the task",
+  "assignTaskToUser":"Assign a task to",
+  "selectUserErrorMessage":"At least one user must be selected"
 }

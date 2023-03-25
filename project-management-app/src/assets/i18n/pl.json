@@ -46,5 +46,11 @@
   "newTaskButton": "Utwórz zadanie",
   "createTaskTitle": "Utwórz zadanie",
   "addTaskTitle": "Dodaj tytuł zadania",
-  "taskTitleLabel": "Tytuł zadania"
+  "taskTitleLabel": "Tytuł zadania",
+  "addTaskDescription": "Dodaj opis zadania",
+  "taskDescriptionLabel": "Opis zadania",
+  "taskCreatedMessage": "Zadanie zostało pomyślnie utworzone.",
+  "selectColumnForTask": "Wybierz kolumnę dla zadania",
+  "assignTaskToUser": "Przypisz zadanie do",
+  "selectUserErrorMessage": "Należy wybrać co najmniej jednego użytkownika"
 }

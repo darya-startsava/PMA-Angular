@@ -18,6 +18,11 @@ export interface UserResponseInterface {
   login?: string | null;
 }
 
+export interface UserLoginIdInterface {
+  login?: string | null;
+  userId?: string | null;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +34,7 @@ export class SignInService {
   tokenChange: Subject<string> = new Subject<string>();
   _id = '';
   name = '';
+  users: Array<UserLoginIdInterface> = [];
 
   constructor(private http: HttpClient) {}
 
@@ -71,6 +77,13 @@ export class SignInService {
       .pipe(
         tap({
           next: (response) => {
+            this.users = response
+              .map((i) => {
+                return { login: i.login || '', userId: i._id };
+              })
+              .sort((a, b) =>
+                a.login > b.login ? 1 : b.login > a.login ? -1 : 0
+              );
             const user = response.filter((i) => i.login === this.login);
             this.login = user[0].login || '';
             this._id = user[0]._id || '';

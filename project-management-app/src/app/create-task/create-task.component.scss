@@ -4,6 +4,13 @@
   align-items: center;
   margin: 15px;
 
+  .create-task_input_title,
+  .create-task_input_description,
+  .create-task_select_column,
+  .create-task_select_user {
+    width: 300px;
+  }
+
   .create-task_buttons_wrapper {
     display: flex;
     justify-content: center;

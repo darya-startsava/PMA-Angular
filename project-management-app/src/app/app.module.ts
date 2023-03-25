@@ -11,6 +11,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppComponent } from './app.component';
@@ -58,6 +59,7 @@ import { ColumnComponent } from './column/column.component';
     MatInputModule,
     MatIconModule,
     MatDialogModule,
+    MatSelectModule,
     FormsModule,
     HttpClientModule,
     TranslocoRootModule,

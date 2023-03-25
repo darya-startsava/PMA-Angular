@@ -4,7 +4,10 @@ import { take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { SignInService } from '../sign-in-page/sign-in.service';
+import {
+  SignInService,
+  UserLoginIdInterface,
+} from '../sign-in-page/sign-in.service';
 import { BoardService, GetAllColumnsByBoardIdInterface } from './board.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CreateColumnComponent } from '../create-column/create-column.component';
@@ -31,6 +34,7 @@ export class BoardComponent implements OnInit {
   attachedToTaskUsers: Array<string> = [];
   columnId = '';
   userId = '';
+  users: Array<UserLoginIdInterface> = [];
 
   constructor(
     private translocoService: TranslocoService,
@@ -53,13 +57,24 @@ export class BoardComponent implements OnInit {
     this.token = this.signInService.token;
     this.getAllColumnsByBorderId();
     this.userId = this.signInService._id;
+    this.users = this.signInService.users;
   }
 
   getAllColumnsByBorderId() {
     this.boardService
       .getAllColumnsByBoardId(this.token, this.boardId)
       .pipe(take(1))
-      .subscribe({ next: () => (this.columns = this.boardService.columns) });
+      .subscribe({
+        next: () => (this.columns = this.boardService.columns),
+        error: (error) => {
+          switch (error.status) {
+            case 403:
+              this.signInService.signOut();
+              this.goToWelcomePage();
+              break;
+          }
+        },
+      });
   }
 
   goToWelcomePage(): void {
@@ -111,19 +126,24 @@ export class BoardComponent implements OnInit {
   }
 
   onOpenCreateTaskModal(): void {
-    this.title = '';
+    this.taskTitle = '';
+    const columns = this.columns.map((column) => {
+      return { columnId: column._id, title: column.title };
+    });
     const createTaskRef = this.dialog.open(CreateTaskComponent, {
-      data: { title: this.title },
+      data: {
+        columns,
+        userId: this.userId,
+        users: this.users,
+      },
     });
 
     createTaskRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
         this.taskTitle = result.title;
-        this.columnId = '6419da83a29eef133574a54f';
-        this.taskOrder = 0;
-        this.description = 'task description';
-        this.attachedToTaskUsers = ['640e5c2c463bef5098f72be2'];
+        this.columnId = result.column;
+        this.description = result.description;
+        this.attachedToTaskUsers = result.users;
         this.createTaskService
           .createTask(
             this.token,
@@ -138,10 +158,10 @@ export class BoardComponent implements OnInit {
           .pipe(take(1))
           .subscribe({
             next: () => {
-              this.message = this.translocoService.translate(
-                'columnCreatedMessage'
-              );
+              this.message =
+                this.translocoService.translate('taskCreatedMessage');
               this.openDialog();
+              // check if needs to be changed
               this.getAllColumnsByBorderId();
             },
             error: (error) => {
