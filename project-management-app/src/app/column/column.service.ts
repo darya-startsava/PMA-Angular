@@ -14,9 +14,7 @@ export interface GetAllTasksByColumnIdInterface {
   users: Array<string>;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ColumnService {
   url = endpoints.boards;
   urlForPutInOrder = endpoints.tasksSet;

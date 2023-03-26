@@ -20,6 +20,7 @@ import {
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
+  providers: [ColumnService],
 })
 export class ColumnComponent implements OnInit {
   @Input() column!: GetAllColumnsByBoardIdInterface;
@@ -30,6 +31,7 @@ export class ColumnComponent implements OnInit {
   token = '';
   message = '';
   tasks: Array<GetAllTasksByColumnIdInterface> = [];
+  _subscription: any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -39,7 +41,11 @@ export class ColumnComponent implements OnInit {
     public confirmation: MatDialog,
     public dialog: MatDialog,
     private router: Router
-  ) {}
+  ) {
+    this._subscription = columnService.tasksListChange.subscribe(
+      (value) => (this.tasks = value)
+    );
+  }
 
   ngOnInit() {
     this.token = this.signInService.token;

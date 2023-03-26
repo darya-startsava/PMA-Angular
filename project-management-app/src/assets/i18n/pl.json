@@ -52,5 +52,8 @@
   "taskCreatedMessage": "Zadanie zostało pomyślnie utworzone.",
   "selectColumnForTask": "Wybierz kolumnę dla zadania",
   "assignTaskToUser": "Przypisz zadanie do",
-  "selectUserErrorMessage": "Należy wybrać co najmniej jednego użytkownika"
+  "selectUserErrorMessage": "Należy wybrać co najmniej jednego użytkownika",
+  "deleteTaskButton": "Usunąć",
+  "confirmDeletionTask": "Czy na pewno chcesz usunąć to zadanie?",
+  "taskAttachedTo": "Załączone do"
 }

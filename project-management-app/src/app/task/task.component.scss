@@ -1,7 +1,37 @@
-.task-item_wrapper {
-  overflow-wrap: break-word;
+@use '@angular/material' as mat;
 
-  .task-item_title {
+$blueGrey50: mat.define-palette(mat.$blue-grey-palette, 50);
+$blueGrey200: mat.define-palette(mat.$blue-grey-palette, 200);
+
+.task_wrapper {
+  overflow-wrap: break-word;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 86%;
+  background-color: mat.get-color-from-palette($blueGrey50);
+  border: mat.get-color-from-palette($blueGrey200) solid 3px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .task_title {
     margin-bottom: 5px;
+    height: 50px;
+    overflow: hidden;
+  }
+
+  .task_description {
+    height: 80px;
+    overflow: hidden;
+  }
+
+  .task_users {
+    height: 40px;
+    overflow: hidden;
+  }
+
+  .task-item_delete-button {
+    margin: 0 30px 10px;
   }
 }

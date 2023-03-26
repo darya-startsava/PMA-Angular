@@ -8,7 +8,7 @@
   </div>
   <div class="board_columns_wrapper">
     <div class="column-item" *ngFor="let column of columns">
-      <app-column [column]="column" (afterColumnDeletion)="getAllColumnsByBorderId()"></app-column>
+      <app-column class="board_column-item" [column]="column" (afterColumnDeletion)="getAllColumnsByBorderId()"></app-column>
     </div>
   </div>
 </div>

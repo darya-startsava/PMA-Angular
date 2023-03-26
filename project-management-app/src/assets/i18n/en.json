@@ -51,6 +51,9 @@
   "taskDescriptionLabel": "Task description",
   "taskCreatedMessage": "The task has been successfully created.",
   "selectColumnForTask": "Select a column for the task",
-  "assignTaskToUser":"Assign a task to",
-  "selectUserErrorMessage":"At least one user must be selected"
+  "assignTaskToUser": "Assign a task to",
+  "selectUserErrorMessage": "At least one user must be selected",
+  "deleteTaskButton": "Delete",
+  "confirmDeletionTask": "Are you sure you want to delete this task?",
+  "taskAttachedTo":"Attached to"
 }

@@ -1,24 +1,32 @@
 @use '@angular/material' as mat;
 
-$blueGrey50: mat.define-palette(mat.$blue-grey-palette, 50);
-$blueGrey200: mat.define-palette(mat.$blue-grey-palette, 200);
+$blueGrey: mat.define-palette(mat.$blue-grey-palette);
+$blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
 
-.column-item_title {
-  text-align: center;
-  width: 90%;
-  overflow-wrap: break-word;
+
+
+.column-item_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .column-item_title {
+    text-align: center;
+    width: 90%;
+    overflow-wrap: break-word;
+  }
+
+  .column-item_task {
+    display: flex;
+    justify-content: center;
+  }
+
+  .column-item_delete-button {
+    width: 90%;
+  }
 }
 
-.task_wrapper {
-  margin-bottom: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 90%;
-  background-color: mat.get-color-from-palette($blueGrey50);
-  border: mat.get-color-from-palette($blueGrey200) solid 3px;
-  border-radius: 10px;
-}
-
-.column-item_delete-button {
-  width: 90%;
+.column-item_task_wrapper {
+  width: 300px;
+  padding-bottom: 10px;
 }
