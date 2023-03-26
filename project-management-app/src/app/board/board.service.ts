@@ -38,29 +38,30 @@ export class BoardService {
       .pipe(
         tap({
           next: (response) => {
-            if (
-              response.length !== 0 &&
-              response.find((column, index) => column.order !== index)
-            ) {
-              this.putInOrderColumns(response, token);
-            } else {
-              this.columns = response;
-              this.changeColumnsList(response);
-            }
+            this.columns = response.sort((a, b) => a.order - b.order);
+            this.changeColumnsList(response.sort((a, b) => a.order - b.order));
           },
         })
       );
   }
 
-  putInOrderColumns(
+  putInOrderColumnsAfterDeletionColumn(
     columns: Array<GetAllColumnsByBoardIdInterface>,
-    token: string
+    token: string,
+    deletedColumnOrder: number
   ): any {
-    const columnsSetForHttp = columns.map((column, index) => {
-      return {
-        _id: column._id,
-        order: index,
-      };
+    const columnsSetForHttp = columns.map((column) => {
+      if (column.order < deletedColumnOrder) {
+        return {
+          _id: column._id,
+          order: column.order,
+        };
+      } else {
+        return {
+          _id: column._id,
+          order: column.order - 1,
+        };
+      }
     });
     return this.http
       .patch<Array<GetAllColumnsByBoardIdInterface>>(
@@ -98,4 +99,70 @@ export class BoardService {
       .pipe(tap());
   }
 
+  putInOrderColumnsAfterDragNDrop(
+    columns: Array<GetAllColumnsByBoardIdInterface>,
+    token: string,
+    previousIndex: number,
+    currentIndex: number
+  ): any {
+    const columnsSetForHttp = columns
+      .map((column) => {
+        if (previousIndex > currentIndex) {
+          if (column.order < currentIndex || column.order > previousIndex) {
+            return {
+              _id: column._id,
+              order: column.order,
+            };
+          } else if (column.order === previousIndex) {
+            return {
+              _id: column._id,
+              order: currentIndex,
+            };
+          } else {
+            return {
+              _id: column._id,
+              order: column.order + 1,
+            };
+          }
+        } else {
+          if (column.order < previousIndex || column.order > currentIndex) {
+            return {
+              _id: column._id,
+              order: column.order,
+            };
+          } else if (column.order === previousIndex) {
+            return {
+              _id: column._id,
+              order: currentIndex,
+            };
+          } else {
+            return {
+              _id: column._id,
+              order: column.order - 1,
+            };
+          }
+        }
+      })
+      .sort((a, b) => a.order - b.order);
+    return this.http
+      .patch<Array<GetAllColumnsByBoardIdInterface>>(
+        this.urlForPutInOrder,
+        columnsSetForHttp,
+        {
+          headers: new HttpHeaders({
+            Authorization: `${token}`,
+          }),
+        }
+      )
+      .pipe(
+        tap({
+          next: (response) => {
+            this.columns = response;
+            this.changeColumnsList(response);
+          },
+        })
+      )
+      .pipe(take(1))
+      .subscribe();
+  }
 }

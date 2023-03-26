@@ -6,10 +6,10 @@
       (click)="onOpenCreateTaskModal()">{{
       t('newTaskButton') }}</button>
   </div>
-  <div class="board_columns_wrapper">
-    <div class="column-item" *ngFor="let column of columns">
+  <div class="board_columns_wrapper" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="column-item" *ngFor="let column of columns" cdkDrag>
       <app-column class="board_column-item" [column]="column"
-        (afterColumnDeletionOrEditing)="getAllColumnsByBorderId()"></app-column>
+        (afterColumnDeletionOrEditing)="putInOrderColumnsAfterDeletionColumn($event)"></app-column>
     </div>
   </div>
 </div>

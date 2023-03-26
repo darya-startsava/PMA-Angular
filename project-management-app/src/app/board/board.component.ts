@@ -3,6 +3,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import {
   SignInService,
@@ -73,6 +74,22 @@ export class BoardComponent implements OnInit {
               this.goToWelcomePage();
               break;
           }
+        },
+      });
+  }
+
+  putInOrderColumnsAfterDeletionColumn($event: any) {
+    this.boardService
+      .getAllColumnsByBoardId(this.token, this.boardId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.columns = this.boardService.columns;
+          this.boardService.putInOrderColumnsAfterDeletionColumn(
+            this.columns,
+            this.token,
+            $event.order
+          );
         },
       });
   }
@@ -179,5 +196,17 @@ export class BoardComponent implements OnInit {
           });
       }
     });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
+      this.boardService.putInOrderColumnsAfterDragNDrop(
+        this.columns,
+        this.token,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

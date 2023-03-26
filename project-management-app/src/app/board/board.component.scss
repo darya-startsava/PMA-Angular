@@ -31,15 +31,6 @@ $blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
 
     .column-item {
       width: 300px;
-      padding: 5px;
-      padding-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      background-color: mat.get-color-from-palette($blueGrey100);
-      border: mat.get-color-from-palette($blueGrey) solid 3px;
-      border-radius: 10px;
 
       .board_column-item {
         width: 300px;

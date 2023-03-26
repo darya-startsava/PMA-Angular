@@ -88,13 +88,16 @@ export class ColumnComponent implements OnInit {
   }
 
   onDeleteColumn() {
-    const { _id, boardId } = this.column;
+    const { _id, boardId, order } = this.column;
     this.boardService
       .deleteColumnById(this.token, boardId, _id)
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.afterColumnDeletionOrEditing.emit();
+          this.afterColumnDeletionOrEditing.emit({
+            event: event,
+            order: order,
+          });
           this.message = this.translocoService.translate(
             'columnDeletionMessage'
           );

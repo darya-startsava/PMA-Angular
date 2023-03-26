@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -63,6 +64,7 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
     MatDialogModule,
     MatSelectModule,
     FormsModule,
+    DragDropModule,
     HttpClientModule,
     TranslocoRootModule,
   ],
