@@ -1,0 +1,23 @@
+.edit-task_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+
+  .edit-task_input_title,
+  .edit-task_input_description,
+  .edit-task_select_column,
+  .edit-task_select_user {
+    width: 300px;
+  }
+
+  .edit-task_buttons_wrapper {
+    display: flex;
+    justify-content: center;
+
+
+    .edit-task_button {
+      width: 100px;
+    }
+  }
+}

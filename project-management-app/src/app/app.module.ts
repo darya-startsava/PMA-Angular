@@ -29,6 +29,7 @@ import { CreateColumnComponent } from './create-column/create-column.component';
 import { TaskComponent } from './task/task.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { ColumnComponent } from './column/column.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ColumnComponent } from './column/column.component';
     TaskComponent,
     CreateTaskComponent,
     ColumnComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,

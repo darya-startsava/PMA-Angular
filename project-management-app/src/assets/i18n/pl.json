@@ -56,5 +56,10 @@
   "deleteTaskButton": "Usunąć",
   "confirmDeletionTask": "Czy na pewno chcesz usunąć to zadanie?",
   "taskAttachedTo": "Załączone do",
-  "taskDeletionMessage": "Zadanie zostało pomyślnie usunięte."
+  "taskDeletionMessage": "Zadanie zostało pomyślnie usunięte.",
+  "taskEditedMessage": "Zadanie zostało pomyślnie edytowane.",
+  "changeTaskTitle": "Edytuj zadanie",
+  "editTaskTitle": "Edytuj tytuł zadania",
+  "editTaskDescription": "Edytuj opis zadania",
+  "save": "Zapisz"
 }

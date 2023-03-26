@@ -1,0 +1,46 @@
+<div class="edit-task_wrapper" *transloco="let t">
+  <h1 mat-dialog-title>{{t('changeTaskTitle')}}</h1>
+  <div mat-dialog-content>
+    <p>{{t('editTaskTitle')}}:</p>
+    <mat-form-field class="edit-task_input_title" appearance="fill">
+      <mat-label>{{t('taskTitleLabel')}}</mat-label>
+      <input matInput [formControl]="title" maxlength="100">
+      <mat-error *ngIf="title.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+    <p>{{t('editTaskDescription')}}:</p>
+    <mat-form-field class="edit-task_input_description" appearance="fill">
+      <mat-label>{{t('taskDescriptionLabel')}}</mat-label>
+      <textarea matInput [formControl]="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10" maxlength="500"></textarea>
+      <mat-error *ngIf="description.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+    <p>{{t('selectColumnForTask')}}:</p>
+    <mat-form-field class="edit-task_select_column" appearance="fill">
+      <mat-select [formControl]="column">
+        <mat-option *ngFor="let column of data.columns" [value]="column.columnId">
+          {{column.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>{{t('assignTaskToUser')}}:</p>
+    <mat-form-field class="edit-task_select_user" appearance="fill">
+      <mat-select multiple [formControl]="users">
+        <mat-option *ngFor="let user of data.users" [value]="user.userId">
+          {{user.login}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="users.hasError('required')">
+        {{t('selectUserErrorMessage')}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="edit-task_buttons_wrapper">
+    <button class="edit-task_button" mat-raised-button color="warn" (click)="onNoClick()">{{t('cancel')}}</button>
+    <button class="edit-task_button" mat-raised-button color="primary" (click)="onEditClick()"
+      [disabled]=" title.invalid ||description.invalid || users.invalid">{{t('save')}}</button>
+  </div>
+</div>

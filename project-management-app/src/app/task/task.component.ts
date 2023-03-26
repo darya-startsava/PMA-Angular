@@ -12,8 +12,29 @@ import {
   ColumnService,
   GetAllTasksByColumnIdInterface,
 } from '../column/column.service';
+import {
+  BoardService,
+  GetAllColumnsByBoardIdInterface,
+} from '../board/board.service';
+import { EditTaskService } from '../edit-task/edit-task.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { EditTaskComponent } from '../edit-task/edit-task.component';
+
+interface ColumnsIdTitle {
+  columnId: string;
+  title: string;
+}
+
+export interface EditTaskDataInterface {
+  title?: string;
+  description?: string;
+  selectedColumnId?: string;
+  columns?: Array<ColumnsIdTitle>;
+  userId?: string;
+  users?: Array<UserLoginIdInterface>;
+  selectedUsers?: Array<string>;
+}
 
 @Component({
   selector: 'app-task',
@@ -30,11 +51,15 @@ export class TaskComponent implements OnInit {
   );
   users: Array<UserLoginIdInterface> = [];
   userLoginsInString = '';
+  dataToEditTask: EditTaskDataInterface = {};
+  columns: Array<GetAllColumnsByBoardIdInterface> = [];
 
   constructor(
     private translocoService: TranslocoService,
     public signInService: SignInService,
     private columnService: ColumnService,
+    private boardService: BoardService,
+    private editTaskService: EditTaskService,
     public confirmation: MatDialog,
     public dialog: MatDialog,
     private router: Router
@@ -47,6 +72,7 @@ export class TaskComponent implements OnInit {
       .filter((item) => this.task.users.find((i) => i === item.userId))
       .map((i) => i.login)
       .join(', ');
+    this.columns = this.boardService.columns;
   }
 
   goToWelcomePage(): void {
@@ -60,6 +86,7 @@ export class TaskComponent implements OnInit {
   }
 
   onOpenConfirmationDeleteTask(): void {
+    event?.stopPropagation();
     const confirmationRef = this.confirmation.open(ConfirmationComponent, {
       data: {
         message: this.messageToConfirmTaskDeletion,
@@ -81,9 +108,7 @@ export class TaskComponent implements OnInit {
       .subscribe({
         next: () => {
           this.afterTaskDeletion.emit();
-          this.message = this.translocoService.translate(
-            'taskDeletionMessage'
-          );
+          this.message = this.translocoService.translate('taskDeletionMessage');
           this.openDialog();
         },
         error: (error) => {
@@ -96,6 +121,86 @@ export class TaskComponent implements OnInit {
               this.message =
                 this.translocoService.translate('commonErrorMessage');
               this.openDialog();
+          }
+        },
+      });
+  }
+
+  onOpenEditTaskModal(): void {
+    this.dataToEditTask.title = this.task.title;
+    this.dataToEditTask.description = this.task.description;
+    this.dataToEditTask.selectedColumnId = this.task.columnId;
+    this.dataToEditTask.columns = this.columns.map((column) => {
+      return { columnId: column._id, title: column.title };
+    });
+    const editTaskRef = this.dialog.open(EditTaskComponent, {
+      data: {
+        title: this.dataToEditTask.title,
+        description: this.dataToEditTask.description,
+        selectedColumnId: this.dataToEditTask.selectedColumnId,
+        columns: this.dataToEditTask.columns,
+        users: this.users,
+        selectedUsers: this.task.users,
+      },
+    });
+
+    editTaskRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        const taskTitle = result.title;
+        const columnId = result.column;
+        const description = result.description;
+        const attachedToTaskUsers = result.users;
+        this.editTaskService
+          .editTask(
+            this.token,
+            this.task.boardId,
+            columnId,
+            this.task._id,
+            taskTitle,
+            this.task.order,
+            description,
+            this.task.userId,
+            attachedToTaskUsers
+          )
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.message =
+                this.translocoService.translate('taskEditedMessage');
+              this.openDialog();
+              // check if needs to be changed
+              this.getAllColumnsByBorderId();
+            },
+            error: (error) => {
+              switch (error.status) {
+                case 403:
+                  this.signInService.signOut();
+                  this.goToWelcomePage();
+                  break;
+                default:
+                  this.message =
+                    this.translocoService.translate('commonErrorMessage');
+                  this.openDialog();
+              }
+            },
+          });
+      }
+    });
+  }
+
+  getAllColumnsByBorderId() {
+    this.boardService
+      .getAllColumnsByBoardId(this.token, this.task.boardId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => (this.columns = this.boardService.columns),
+        error: (error) => {
+          switch (error.status) {
+            case 403:
+              this.signInService.signOut();
+              this.goToWelcomePage();
+              break;
           }
         },
       });
