@@ -14,6 +14,13 @@ export interface GetAllTasksByColumnIdInterface {
   users: Array<string>;
 }
 
+export interface UpdateColumnTitleInterface {
+  title: string;
+  order: number;
+  boardId: string;
+  columnId: string;
+}
+
 @Injectable()
 export class ColumnService {
   url = endpoints.boards;
@@ -101,6 +108,26 @@ export class ColumnService {
           Authorization: `${token}`,
         }),
       })
+      .pipe(tap());
+  }
+
+  updateTaskTitle(
+    token: string,
+    boardId: string,
+    columnId: string,
+    title: string,
+    order: number
+  ): Observable<UpdateColumnTitleInterface> {
+    return this.http
+      .put<UpdateColumnTitleInterface>(
+        `${this.url}/${boardId}/columns/${columnId}`,
+        { title, order },
+        {
+          headers: new HttpHeaders({
+            Authorization: `${token}`,
+          }),
+        }
+      )
       .pipe(tap());
   }
 }

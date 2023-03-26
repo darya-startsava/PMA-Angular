@@ -146,7 +146,6 @@ export class TaskComponent implements OnInit {
 
     editTaskRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
         const taskTitle = result.title;
         const columnId = result.column;
         const description = result.description;

@@ -1,5 +1,19 @@
 <div class="column-item_wrapper" *transloco="let t">
-  <h2 class="column-item_title">{{column.title}}</h2>
+  <h2 *ngIf="showTitle" class="column-item_title" (click)="onEditTitle()">{{column.title}}</h2>
+  <div *ngIf="!showTitle" class="column-item_title_edit">
+    <mat-form-field appearance="fill">
+      <mat-label>{{t('columnTitleLabel')}}</mat-label>
+      <input matInput  [formControl]="title" maxlength="100">
+      <mat-error *ngIf="title.hasError('required')">
+        {{t ('fieldIsRequired')}}
+      </mat-error>
+    </mat-form-field>
+    <div mat-dialog-actions class="edit-column_buttons_wrapper">
+      <button class="edit-column_button" mat-raised-button color="warn" (click)="onNoClick()">{{t('cancel')}}</button>
+      <button class="edit-column_button" mat-raised-button color="primary" (click)="onSaveNewTitle()"
+        [disabled]=" title.invalid">{{t('save')}}</button>
+    </div>
+  </div>
   <div class="column-item_task_wrapper" *ngFor="let task of tasks">
     <app-task class="column-item_task" [task]="task" (afterTaskDeletion)="getAllTasksByColumnId()"></app-task>
   </div>

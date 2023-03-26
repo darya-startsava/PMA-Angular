@@ -3,6 +3,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 import {
   BoardService,
@@ -24,7 +25,7 @@ import {
 })
 export class ColumnComponent implements OnInit {
   @Input() column!: GetAllColumnsByBoardIdInterface;
-  @Output() afterColumnDeletion = new EventEmitter();
+  @Output() afterColumnDeletionOrEditing = new EventEmitter();
   messageToConfirmColumnDeletion = this.translocoService.translate(
     'confirmDeletionColumn'
   );
@@ -32,6 +33,8 @@ export class ColumnComponent implements OnInit {
   message = '';
   tasks: Array<GetAllTasksByColumnIdInterface> = [];
   _subscription: any;
+  showTitle = true;
+  title: any;
 
   constructor(
     private translocoService: TranslocoService,
@@ -91,7 +94,7 @@ export class ColumnComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.afterColumnDeletion.emit();
+          this.afterColumnDeletionOrEditing.emit();
           this.message = this.translocoService.translate(
             'columnDeletionMessage'
           );
@@ -110,5 +113,30 @@ export class ColumnComponent implements OnInit {
           }
         },
       });
+  }
+
+  onEditTitle() {
+    this.showTitle = false;
+    this.title = new FormControl(this.column.title, Validators.required);
+  }
+
+  onSaveNewTitle() {
+    this.showTitle = true;
+    this.columnService
+      .updateTaskTitle(
+        this.token,
+        this.column.boardId,
+        this.column._id,
+        this.title.value,
+        this.column.order
+      )
+      .pipe(take(1))
+      .subscribe({
+        next: () => this.afterColumnDeletionOrEditing.emit(),
+      });
+  }
+
+  onNoClick() {
+    this.showTitle = true;
   }
 }

@@ -16,6 +16,19 @@ $blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
     overflow-wrap: break-word;
   }
 
+  .column-item_title_edit {
+    margin-bottom: 10px;
+
+    .edit-column_buttons_wrapper {
+      display: flex;
+      column-gap: 20px;
+
+      .edit-column_button {
+        width: 100px;
+      }
+    }
+  }
+
   .column-item_task {
     display: flex;
     justify-content: center;
