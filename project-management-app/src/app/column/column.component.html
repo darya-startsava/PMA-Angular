@@ -1,7 +1,7 @@
 <div class="column-item_wrapper" *transloco="let t">
   <h2 class="column-item_title">{{column.title}}</h2>
-  <div class="column-item_task_wrapper"*ngFor="let task of tasks">
-    <app-task class="column-item_task" [task]="task"></app-task>
+  <div class="column-item_task_wrapper" *ngFor="let task of tasks">
+    <app-task class="column-item_task" [task]="task" (afterTaskDeletion)="getAllTasksByColumnId()"></app-task>
   </div>
   <button class="column-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmationDeleteColumn()">{{
     t('deleteColumnButton') }}</button>

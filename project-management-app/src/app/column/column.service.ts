@@ -96,7 +96,7 @@ export class ColumnService {
     taskId: string
   ): Observable<unknown> {
     return this.http
-      .delete(`${this.url}/${boardId}/columns/${columnId}/tasks${taskId}`, {
+      .delete(`${this.url}/${boardId}/columns/${columnId}/tasks/${taskId}`, {
         headers: new HttpHeaders({
           Authorization: `${token}`,
         }),

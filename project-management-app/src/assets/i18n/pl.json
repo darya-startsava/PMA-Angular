@@ -55,5 +55,6 @@
   "selectUserErrorMessage": "Należy wybrać co najmniej jednego użytkownika",
   "deleteTaskButton": "Usunąć",
   "confirmDeletionTask": "Czy na pewno chcesz usunąć to zadanie?",
-  "taskAttachedTo": "Załączone do"
+  "taskAttachedTo": "Załączone do",
+  "taskDeletionMessage": "Zadanie zostało pomyślnie usunięte."
 }
