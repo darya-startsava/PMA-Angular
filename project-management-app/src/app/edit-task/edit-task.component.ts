@@ -27,12 +27,7 @@ export class EditTaskComponent {
   title = new FormControl(this.data.title, Validators.required);
   description = new FormControl(this.data.description, Validators.required);
   column = new FormControl(this.data.selectedColumnId);
-  users = new FormControl(
-    this.data.users?.filter((item) =>
-      this.data.selectedUsers.find((i) => i === item.userId)
-    ),
-    Validators.required
-  );
+  users = new FormControl(this.data.selectedUsers, Validators.required);
 
   constructor(
     public createTaskRef: MatDialogRef<EditTaskComponent>,
