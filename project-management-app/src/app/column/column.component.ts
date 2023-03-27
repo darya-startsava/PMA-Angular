@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import {
   BoardService,
@@ -158,5 +159,17 @@ export class ColumnComponent implements OnInit {
 
   onNoClick() {
     this.showTitle = true;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
+      this.columnService.putInOrderTasksAfterDragNDrop(
+        this.tasks,
+        this.token,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

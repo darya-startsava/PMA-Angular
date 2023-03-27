@@ -59,7 +59,7 @@ export class ColumnService {
   putInOrderTasksAfterDeletionTask(
     tasks: Array<GetAllTasksByColumnIdInterface>,
     token: string,
-    deletedTaskOrder:number
+    deletedTaskOrder: number
   ): any {
     const tasksSetForHttp = tasks.map((task) => {
       if (task.order < deletedTaskOrder) {
@@ -89,8 +89,81 @@ export class ColumnService {
       .pipe(
         tap({
           next: (response) => {
-            this.tasks = response;
-            this.changeTasksList(response);
+            this.tasks = response.sort((a, b) => a.order - b.order);
+            this.changeTasksList(response.sort((a, b) => a.order - b.order));
+          },
+        })
+      )
+      .pipe(take(1))
+      .subscribe();
+  }
+
+  putInOrderTasksAfterDragNDrop(
+    tasks: Array<GetAllTasksByColumnIdInterface>,
+    token: string,
+    previousIndex: number,
+    currentIndex: number
+  ): any {
+    const columnsSetForHttp = tasks
+      .map((task) => {
+        if (previousIndex > currentIndex) {
+          if (task.order < currentIndex || task.order > previousIndex) {
+            return {
+              _id: task._id,
+              order: task.order,
+              columnId: task.columnId,
+            };
+          } else if (task.order === previousIndex) {
+            return {
+              _id: task._id,
+              order: currentIndex,
+              columnId: task.columnId,
+            };
+          } else {
+            return {
+              _id: task._id,
+              order: task.order + 1,
+              columnId: task.columnId,
+            };
+          }
+        } else {
+          if (task.order < previousIndex || task.order > currentIndex) {
+            return {
+              _id: task._id,
+              order: task.order,
+              columnId: task.columnId,
+            };
+          } else if (task.order === previousIndex) {
+            return {
+              _id: task._id,
+              order: currentIndex,
+              columnId: task.columnId,
+            };
+          } else {
+            return {
+              _id: task._id,
+              order: task.order - 1,
+              columnId: task.columnId,
+            };
+          }
+        }
+      })
+      .sort((a, b) => a.order - b.order);
+    return this.http
+      .patch<Array<GetAllTasksByColumnIdInterface>>(
+        this.urlForPutInOrder,
+        columnsSetForHttp,
+        {
+          headers: new HttpHeaders({
+            Authorization: `${token}`,
+          }),
+        }
+      )
+      .pipe(
+        tap({
+          next: (response) => {
+            this.tasks = response.sort((a, b) => a.order - b.order);
+            this.changeTasksList(response.sort((a, b) => a.order - b.order));
           },
         })
       )
