@@ -63,6 +63,23 @@ export class ColumnComponent implements OnInit {
       .subscribe({ next: () => (this.tasks = this.columnService.tasks) });
   }
 
+  putInOrderTasksAfterDeletionTask($event: any) {
+    const { _id, boardId } = this.column;
+    this.columnService
+      .getAllTasksByColumnId(this.token, boardId, _id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.tasks = this.columnService.tasks;
+          this.columnService.putInOrderTasksAfterDeletionTask(
+            this.tasks,
+            this.token,
+            $event.order
+          );
+        },
+      });
+  }
+
   goToWelcomePage(): void {
     this.router.navigate(['']);
   }

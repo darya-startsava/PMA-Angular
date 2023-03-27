@@ -49,30 +49,32 @@ export class ColumnService {
       .pipe(
         tap({
           next: (response) => {
-            if (
-              response.length !== 0 &&
-              response.find((task, index) => task.order !== index)
-            ) {
-              this.putInOrderTasks(response, token);
-            } else {
-              this.tasks = response;
-              this.changeTasksList(response);
-            }
+            this.tasks = response.sort((a, b) => a.order - b.order);
+            this.changeTasksList(response.sort((a, b) => a.order - b.order));
           },
         })
       );
   }
 
-  putInOrderTasks(
+  putInOrderTasksAfterDeletionTask(
     tasks: Array<GetAllTasksByColumnIdInterface>,
-    token: string
+    token: string,
+    deletedTaskOrder:number
   ): any {
-    const tasksSetForHttp = tasks.map((task, index) => {
-      return {
-        _id: task._id,
-        order: index,
-        columnId: task.columnId,
-      };
+    const tasksSetForHttp = tasks.map((task) => {
+      if (task.order < deletedTaskOrder) {
+        return {
+          _id: task._id,
+          order: task.order,
+          columnId: task.columnId,
+        };
+      } else {
+        return {
+          _id: task._id,
+          order: task.order - 1,
+          columnId: task.columnId,
+        };
+      }
     });
     return this.http
       .patch<Array<GetAllTasksByColumnIdInterface>>(

@@ -101,13 +101,16 @@ export class TaskComponent implements OnInit {
   }
 
   onDeleteTask() {
-    const { _id, columnId, boardId } = this.task;
+    const { _id, columnId, boardId, order } = this.task;
     this.columnService
       .deleteTaskById(this.token, boardId, columnId, _id)
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.afterTaskDeletion.emit();
+          this.afterTaskDeletion.emit({
+            event: event,
+            order: order,
+          });
           this.message = this.translocoService.translate('taskDeletionMessage');
           this.openDialog();
         },
