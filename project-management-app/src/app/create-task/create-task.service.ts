@@ -21,6 +21,47 @@ export class CreateTaskService {
   url = endpoints.boards;
   constructor(private http: HttpClient) {}
 
+  findTaskOrderAndCreateTask(
+    token: string,
+    boardId: string,
+    columnId: string,
+    title: string,
+    description: string,
+    userId: string,
+    users: Array<string>
+  ): Observable<Array<CreateTaskInterface>> {
+    return this.http
+      .get<any>(`${this.url}/${boardId}/columns/${columnId}/tasks`, {
+        headers: new HttpHeaders({
+          Authorization: `${token}`,
+        }),
+      })
+      .pipe(
+        tap({
+          next: (response) => {
+            console.log(response);
+          },
+        })
+      )
+      .pipe(
+        tap({
+          next: (result) => {
+            console.log('result,', result);
+            this.createTask(
+              token,
+              boardId,
+              columnId,
+              title,
+              result.length,
+              description,
+              userId,
+              users
+            );
+          },
+        })
+      );
+  }
+
   createTask(
     token: string,
     boardId: string,
@@ -30,7 +71,8 @@ export class CreateTaskService {
     description: string,
     userId: string,
     users: Array<string>
-  ): Observable<CreateTaskInterface> {
+  ) {
+    console.log(order);
     return this.http
       .post<CreateTaskInterface>(
         `${this.url}/${boardId}/columns/${columnId}/tasks`,
@@ -47,6 +89,7 @@ export class CreateTaskService {
           }),
         }
       )
-      .pipe(tap());
+      .pipe(tap())
+      .subscribe();
   }
 }

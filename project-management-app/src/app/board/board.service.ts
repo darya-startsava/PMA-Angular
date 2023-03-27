@@ -165,4 +165,26 @@ export class BoardService {
       .pipe(take(1))
       .subscribe();
   }
+
+  getTasksAmountByColumnId(
+    token: string,
+    boardId: string,
+    columnId: string
+  ): any {
+    return this.http
+      .get<any>(`${this.url}/${boardId}/columns/${columnId}/tasks`, {
+        headers: new HttpHeaders({
+          Authorization: `${token}`,
+        }),
+      })
+      .pipe(
+        tap({
+          next: (response) => {
+            console.log(response);
+          },
+        })
+      )
+      .pipe(take(1))
+      .subscribe();
+  }
 }

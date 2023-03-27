@@ -31,7 +31,6 @@ export class BoardComponent implements OnInit {
   _subscription: any;
   description = '';
   taskTitle = '';
-  taskOrder = 0;
   attachedToTaskUsers: Array<string> = [];
   columnId = '';
   userId = '';
@@ -162,12 +161,11 @@ export class BoardComponent implements OnInit {
         this.description = result.description;
         this.attachedToTaskUsers = result.users;
         this.createTaskService
-          .createTask(
+          .findTaskOrderAndCreateTask(
             this.token,
             this.boardId,
             this.columnId,
             this.taskTitle,
-            this.taskOrder,
             this.description,
             this.userId,
             this.attachedToTaskUsers
