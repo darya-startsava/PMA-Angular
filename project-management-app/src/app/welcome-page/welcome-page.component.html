@@ -1,1 +1,7 @@
-<p>welcome-page works!</p>
+<div class="welcome-page_wrapper" *transloco="let t">
+  <h1>Project management app</h1>
+  <p><b>Project management app</b> {{t('aboutApp')}}</p>
+  <p><b>Project management app</b> {{t('aboutDeveloper', {name:'Darya Startsava'})}} <a
+      href="https://github.com/darya-startsava">{{t('githubProfile')}}</a></p>
+      <p><b>Project management app</b> {{t('aboutCourse')}} <a href="https://rs.school/js-en/">2022Q3</a></p>
+</div>

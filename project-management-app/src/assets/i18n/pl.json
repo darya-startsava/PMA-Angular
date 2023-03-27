@@ -61,5 +61,9 @@
   "changeTaskTitle": "Edytuj zadanie",
   "editTaskTitle": "Edytuj tytuł zadania",
   "editTaskDescription": "Edytuj opis zadania",
-  "save": "Zapisz"
+  "save": "Zapisz",
+  "aboutApp": "jest systemem zarządzania projektami. Jest bardzo przydatny do przydzielania, ustalania priorytetów i wykonywania zadań podczas pracy w zespole. Możesz tworzyć i usuwać tablice, tworzyć, usuwać, przenosić i ustalać priorytety zadań, przydzielać zadania członkom zespołu.",
+  "aboutDeveloper": "została stworzona przez programistkę front-end {{name}}.",
+  "githubProfile": "Profil GitHub.",
+  "aboutCourse":"to ostatnie zadanie w RS School."
 }

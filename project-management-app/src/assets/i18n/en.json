@@ -61,5 +61,9 @@
   "changeTaskTitle": "Edit task",
   "editTaskTitle": "Edit task title",
   "editTaskDescription": "Edit task description",
-  "save": "Save"
+  "save": "Save",
+  "aboutApp": "is a project management system. It is very useful for allocating, prioritizing and completing tasks when working in a team. You can create and delete boards, create, delete, move and prioritize tasks, assign a task to a team member.",
+  "aboutDeveloper": "was developed by the frontend developer {{name}}.",
+  "githubProfile":"GitHub profile.",
+  "aboutCourse":"is a final task at RS School."
 }
