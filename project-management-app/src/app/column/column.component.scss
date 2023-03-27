@@ -6,7 +6,7 @@ $blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
 
 
 .column-item_wrapper {
-  width: 300px;
+  width: 330px;
   padding: 5px;
   padding-bottom: 10px;
   display: flex;
@@ -16,11 +16,23 @@ $blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
   background-color: mat.get-color-from-palette($blueGrey100);
   border: mat.get-color-from-palette($blueGrey) solid 3px;
   border-radius: 10px;
+  overflow-y: hidden;
+  max-height: 70vh;
 
   .column-item_title {
     text-align: center;
     width: 90%;
     overflow-wrap: break-word;
+  }
+
+  .column-items_task_wrapper {
+    overflow-y: auto;
+    margin-bottom: 10px;
+
+    .column-item_task_wrapper {
+      width: 300px;
+      padding-bottom: 10px;
+    }
   }
 
   .column-item_title_edit {
@@ -44,9 +56,4 @@ $blueGrey100: mat.define-palette(mat.$blue-grey-palette, 100);
   .column-item_delete-button {
     width: 90%;
   }
-}
-
-.column-item_task_wrapper {
-  width: 300px;
-  padding-bottom: 10px;
 }

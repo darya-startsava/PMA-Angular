@@ -3,7 +3,7 @@
   <div *ngIf="!showTitle" class="column-item_title_edit">
     <mat-form-field appearance="fill">
       <mat-label>{{t('columnTitleLabel')}}</mat-label>
-      <input matInput  [formControl]="title" maxlength="100">
+      <input matInput [formControl]="title" maxlength="100">
       <mat-error *ngIf="title.hasError('required')">
         {{t ('fieldIsRequired')}}
       </mat-error>
@@ -14,8 +14,11 @@
         [disabled]=" title.invalid">{{t('save')}}</button>
     </div>
   </div>
-  <div class="column-item_task_wrapper" *ngFor="let task of tasks" cdkDrag>
-    <app-task class="column-item_task" [task]="task" (afterTaskDeletion)="putInOrderTasksAfterDeletionTask($event)"></app-task>
+  <div class="column-items_task_wrapper">
+    <div class="column-item_task_wrapper" *ngFor="let task of tasks" cdkDrag>
+      <app-task class="column-item_task" [task]="task" (afterTaskDeletion)="putInOrderTasksAfterDeletionTask($event)">
+      </app-task>
+    </div>
   </div>
   <button class="column-item_delete-button" mat-raised-button color="warn" (click)="onOpenConfirmationDeleteColumn()">{{
     t('deleteColumnButton') }}</button>
