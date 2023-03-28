@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subject } from 'rxjs';
 import { endpoints } from '../constants';
 
 export interface GetAllBoardsInterface {
@@ -16,8 +16,14 @@ export interface GetAllBoardsInterface {
 export class BoardsService {
   url = endpoints.boards;
   boards: Array<GetAllBoardsInterface> = [];
+  boardsListChange: Subject<Array<GetAllBoardsInterface>> = new Subject<
+    Array<GetAllBoardsInterface>
+  >();
 
   constructor(private http: HttpClient) {}
+  changeBoardsList(boards: Array<GetAllBoardsInterface>) {
+    this.boardsListChange.next(boards);
+  }
 
   getAllBoards(token: string): Observable<Array<GetAllBoardsInterface>> {
     return this.http
@@ -28,7 +34,10 @@ export class BoardsService {
       })
       .pipe(
         tap({
-          next: (response) => (this.boards = response),
+          next: (response) => {
+            this.boards = response;
+            this.changeBoardsList(response);
+          },
         })
       );
   }

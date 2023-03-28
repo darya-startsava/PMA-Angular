@@ -1,4 +1,5 @@
-const url = 'http://3.125.4.204:3000';
+const url =
+  'https://final-task-backend-production-f37a.up.railway.app';
 export const endpoints = {
   signIn: `${url}/auth/signin`,
   signUp: `${url}/auth/signup`,

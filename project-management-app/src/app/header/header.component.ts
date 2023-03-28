@@ -8,6 +8,8 @@ import { SignInService } from '../sign-in-page/sign-in.service';
 import { CreateBoardService } from '../create-board/create-board.service';
 import { CreateBoardComponent } from '../create-board/create-board.component';
 import { DialogComponent } from '../dialog/dialog.component';
+import { BoardsService } from '../main-page/boards.service';
+
 
 @Component({
   selector: 'app-header',
@@ -25,6 +27,7 @@ export class HeaderComponent {
     private translocoService: TranslocoService,
     public signInService: SignInService,
     private createBoardService: CreateBoardService,
+    private boardsService: BoardsService,
     private router: Router,
     public dialog: MatDialog
   ) {
@@ -68,6 +71,7 @@ export class HeaderComponent {
           .subscribe({
             next: () => {
               this.router.navigate(['main']);
+              this.boardsService.getAllBoards(this.token).pipe(take(1)).subscribe({});
               this.message = this.translocoService.translate(
                 'boardCreatedMessage'
               );

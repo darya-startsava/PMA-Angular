@@ -20,6 +20,7 @@ export class MainPageComponent implements OnInit {
   messageToConfirm = this.translocoService.translate('confirmDeletionBoard');
   currentBoardId = '';
   message = '';
+  _subscription: any;
 
   constructor(
     public signInService: SignInService,
@@ -28,7 +29,11 @@ export class MainPageComponent implements OnInit {
     private translocoService: TranslocoService,
     private router: Router,
     public dialog: MatDialog
-  ) {}
+  ) {
+        this._subscription = boardsService.boardsListChange.subscribe(
+          (value) => (this.boards = value)
+        );
+  }
 
   ngOnInit() {
     this.token = this.signInService.token;
