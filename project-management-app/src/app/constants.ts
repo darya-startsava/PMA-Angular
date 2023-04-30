@@ -1,5 +1,4 @@
-const url =
-  'https://final-task-backend-production-f37a.up.railway.app';
+const url = 'https://pma-angular.onrender.com';
 export const endpoints = {
   signIn: `${url}/auth/signin`,
   signUp: `${url}/auth/signup`,
