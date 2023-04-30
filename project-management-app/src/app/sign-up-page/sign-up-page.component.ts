@@ -24,6 +24,7 @@ export class SignUpPageComponent {
   });
   message = '';
   hide = true;
+  requestPending = false;
 
   constructor(
     public signUpService: SignUpService,
@@ -44,12 +45,14 @@ export class SignUpPageComponent {
   }
 
   onSubmit(): void {
+    this.requestPending = true;
     const login = this.signUpForm.value.login;
     this.signUpService
       .signUp(this.signUpForm.value)
       .pipe(take(1))
       .subscribe({
         next: () => {
+          this.requestPending = false;
           this.message = this.translocoService.translate(
             'successfullyRegisteredMessage',
             { login: login }
@@ -58,6 +61,7 @@ export class SignUpPageComponent {
           this.goToSignInPage();
         },
         error: (error) => {
+          this.requestPending = false;
           switch (error.status) {
             case 409:
               this.message = this.translocoService.translate(

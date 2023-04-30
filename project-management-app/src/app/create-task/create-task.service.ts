@@ -37,16 +37,11 @@ export class CreateTaskService {
         }),
       })
       .pipe(
-        tap({
-          next: (response) => {
-            console.log(response);
-          },
-        })
+        tap()
       )
       .pipe(
         tap({
           next: (result) => {
-            console.log('result,', result);
             this.createTask(
               token,
               boardId,
@@ -72,7 +67,6 @@ export class CreateTaskService {
     userId: string,
     users: Array<string>
   ) {
-    console.log(order);
     return this.http
       .post<CreateTaskInterface>(
         `${this.url}/${boardId}/columns/${columnId}/tasks`,

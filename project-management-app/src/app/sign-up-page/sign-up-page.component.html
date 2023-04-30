@@ -47,4 +47,5 @@
     <button mat-raised-button color="primary" class="button" type="submit" [disabled]="signUpForm.invalid">{{t
       ('signUp')}}</button>
   </form>
+  <mat-spinner *ngIf="requestPending" class="sign-up_form_spinner"></mat-spinner>
 </div>

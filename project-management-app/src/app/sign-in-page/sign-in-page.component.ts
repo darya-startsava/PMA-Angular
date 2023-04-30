@@ -24,6 +24,7 @@ export class SignInPageComponent {
 
   message = '';
   hide = true;
+  requestPending = false;
 
   constructor(
     public signInService: SignInService,
@@ -44,15 +45,18 @@ export class SignInPageComponent {
   }
 
   onSubmit(): void {
+    this.requestPending = true;
     this.signInService
       .signIn(this.signInForm.value)
       .pipe(take(1))
       .subscribe({
         next: () => {
+          this.requestPending = false;
           this.goToMainPage();
           this.signInService.getUserByLogin().subscribe();
         },
         error: (error) => {
+          this.requestPending = false;
           switch (error.status) {
             case 401:
               this.message =

@@ -1,6 +1,8 @@
 .sign-up_form_wrapper {
   width: 320px;
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 
   .sign-up_title {
     text-align: center;
@@ -9,5 +11,10 @@
   .sign-up_form_inputs_wrapper {
     display: flex;
     flex-direction: column;
+  }
+
+  .sign-up_form_spinner {
+    align-self: center;
+    margin-top: 15px;
   }
 }

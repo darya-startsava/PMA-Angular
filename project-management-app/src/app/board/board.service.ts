@@ -177,13 +177,7 @@ export class BoardService {
           Authorization: `${token}`,
         }),
       })
-      .pipe(
-        tap({
-          next: (response) => {
-            console.log(response);
-          },
-        })
-      )
+      .pipe(tap())
       .pipe(take(1))
       .subscribe();
   }

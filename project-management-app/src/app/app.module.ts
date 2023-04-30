@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -65,6 +66,7 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
     MatSelectModule,
     FormsModule,
     DragDropModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     TranslocoRootModule,
   ],

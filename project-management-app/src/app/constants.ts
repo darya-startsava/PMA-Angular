@@ -1,4 +1,4 @@
-const url = 'https://pma-angular.onrender.com';
+export const url = 'https://pma-angular.onrender.com';
 export const endpoints = {
   signIn: `${url}/auth/signin`,
   signUp: `${url}/auth/signup`,

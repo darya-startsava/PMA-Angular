@@ -1,6 +1,8 @@
 .sign-in_form_wrapper {
   width: 320px;
   margin-top: 15px;
+  display: flex;
+  flex-direction:column;
 
   .sign-in_title {
     text-align: center;
@@ -9,5 +11,10 @@
   .sign-in_form_inputs_wrapper {
     display: flex;
     flex-direction: column;
+  }
+
+  .sign-in_form_spinner {
+    align-self: center;
+    margin-top: 15px;
   }
 }
